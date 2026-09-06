@@ -1,0 +1,35 @@
+{
+  "start_date": "2010-01-01",
+  "end_date": "2025-12-31",
+  "context_length": 256,
+  "prediction_length": 20,
+  "validation_days": 252,
+  "target": "log_return",
+  "max_abs_return": 0.5,
+  "candidate_tickers": 133,
+  "successful_tickers": 132,
+  "train_tickers": 132,
+  "validation_tickers": 132,
+  "held_out_tickers": [
+    "AAPL",
+    "AMZN",
+    "CVNA",
+    "ENPH",
+    "IONQ",
+    "MSFT",
+    "NVDA",
+    "PLUG",
+    "RKLB",
+    "SMCI"
+  ],
+  "asset_class_counts": {
+    "equity_etf": 22,
+    "equity_growth": 25,
+    "equity_large": 50,
+    "international_equity": 18,
+    "rates_bonds": 14,
+    "volatility": 3
+  },
+  "train_rows": 441924,
+  "validation_rows": 67056
+}

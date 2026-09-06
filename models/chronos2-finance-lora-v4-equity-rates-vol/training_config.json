@@ -1,0 +1,30 @@
+{
+  "version": "V4",
+  "dataset": "equities_rates_volatility",
+  "model_id": "amazon/chronos-2",
+  "train_file": "data\\chronos_finance_equity_rates_vol\\train.parquet",
+  "validation_file": "data\\chronos_finance_equity_rates_vol\\validation.parquet",
+  "context_length": 256,
+  "prediction_length": 20,
+  "finetune_mode": "lora",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "self_attention.q",
+      "self_attention.v",
+      "self_attention.k",
+      "self_attention.o",
+      "output_patch_embedding.output_layer"
+    ]
+  },
+  "learning_rate": 2e-05,
+  "lr_scheduler_type": "constant_with_warmup",
+  "warmup_steps": 100,
+  "num_steps": 2000,
+  "batch_size": 1,
+  "gradient_accumulation_steps": 4,
+  "train_series": 132,
+  "validation_series": 132
+}
