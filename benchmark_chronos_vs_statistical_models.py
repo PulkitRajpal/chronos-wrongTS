@@ -1,69 +1,49 @@
 
 """
-CHRONOS-2 vs STATISTICAL MODELS — FINANCIAL FORECASTING BENCHMARK
-=================================================================
+FINAL CHRONOS-2 vs STATISTICAL / ML BENCHMARK
+=============================================
 
-Models
-------
-1. Naive Random Walk
-2. ARIMA
-3. ETS / Exponential Smoothing
-4. GARCH(1,1)
-5. EGARCH(1,1)          [optional, if arch is installed]
-6. GJR-GARCH(1,1)       [optional, if arch is installed]
-7. VAR                  [cross-market only]
-8. XGBoost              [modern ML baseline]
-9. LightGBM             [optional, if installed]
-10. Chronos-2           [TSFM]
+10 stocks:
+    AAPL, MSFT, NVDA, AMZN, ENPH, SMCI, CVNA, PLUG, RKLB, IONQ
 
-Experiments
------------
-A. Univariate Close
-B. OHLCV
-C. Cross-market: stock + SPX + VIX
-D. Spike / tail evaluation
-E. Limited-history (cold-start) evaluation
+Models:
+    Naive
+    ARIMA
+    ETS
+    GARCH
+    EGARCH
+    GJR-GARCH
+    XGBoost
+    LightGBM
+    VAR (cross-market only)
+    Chronos-2
 
-Expected directory
-------------------
-project/
-├── poc.py
-├── data/
-│   ├── AAPL.csv
-│   ├── MSFT.csv
-│   ├── NVDA.csv
-│   ├── AMZN.csv
-│   ├── ENPH.csv
-│   ├── SMCI.csv
-│   ├── CVNA.csv
-│   ├── PLUG.csv
-│   ├── RKLB.csv
-│   ├── IONQ.csv
-│   ├── SPX.csv        # optional for cross-market
-│   └── VIX.csv        # optional for cross-market
-└── results/
+Experiments:
+    1. Univariate Close
+    2. OHLCV
+    3. Cross-market: Stock + SPX + VIX
+    4. Spike/tail test
+    5. Cold-start history-length test
 
-Stock CSV format
-----------------
-date,open,high,low,close,volume
+IMPORTANT:
+    This version preserves the Chronos implementation pattern from the
+    known-working AAPL code:
+      - resolve/check device before loading
+      - regular synthetic timestamps
+      - Chronos2Pipeline.predict_df(...)
+      - target="target"
+      - explicit quantiles
 
-Notes
------
-- All evaluation is walk-forward.
-- Models only see data at or before the cutoff.
-- Forecast horizons are trading observations, not calendar days.
-- Chronos receives a synthetic regular timeline because market dates contain
-  weekends/holidays.
-- Metrics are calculated both in price space and normalized return space.
-- The goal is model comparison, not trading-strategy evaluation.
+For debugging:
+    FORCE_CPU = True
+    Set to False only after the CPU run is confirmed.
 
-Install
--------
-pip install -U pandas numpy scipy scikit-learn statsmodels xgboost torch \
-    "chronos-forecasting>=2.0" arch matplotlib
+Expected stock CSV format:
+    date,open,high,low,close,volume
 
-Optional:
-pip install lightgbm
+Macro CSV:
+    SPX.csv
+    VIX.csv
 """
 
 from __future__ import annotations
@@ -77,12 +57,12 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import torch
 
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.api import VAR
-
 from xgboost import XGBRegressor
 
 try:
@@ -126,34 +106,70 @@ VIX_FILE = DATA_DIR / "VIX.csv"
 
 CHRONOS_MODEL = "amazon/chronos-2"
 
-REQUESTED_DEVICE = "cuda"
+# True = safest for validating the pipeline.
+# False = use CUDA if the installed PyTorch/driver/model combination works.
+FORCE_CPU = False
 
 HORIZONS = [1, 5, 10, 20]
 
-# Use 50 initially. Set to None to use every possible cutoff.
+# Number of walk-forward cutoffs per stock.
+# Set to None for every eligible cutoff.
 N_WINDOWS = 50
 
-# Minimum data required for a benchmark.
 MIN_HISTORY = 300
-
-# Training window for ML models.
 ML_LOOKBACK = 252
-
-# Chronos context.
 CHRONOS_CONTEXT = 512
 
-# Cold-start history lengths.
+# Cold-start experiment.
 COLD_START_LENGTHS = [30, 60, 90, 180]
 
-# Spike threshold.
+# Spike definition.
 SPIKE_SIGMA = 2.0
 
-# Probabilistic levels.
+# Chronos probability levels.
 QUANTILES = [0.05, 0.10, 0.50, 0.90, 0.95]
 
 
 # ============================================================
-# DATA LOADING
+# DEVICE
+# ============================================================
+
+def resolve_device() -> str:
+    """
+    Preserve the working-code pattern:
+    check actual CUDA tensor allocation, not only
+    torch.cuda.is_available().
+    """
+
+    if FORCE_CPU:
+        print("FORCE_CPU=True -> using CPU.")
+        return "cpu"
+
+    if not torch.cuda.is_available():
+        print("CUDA is not available; falling back to CPU.")
+        return "cpu"
+
+    try:
+        torch.randn(1, device="cuda")
+        name = torch.cuda.get_device_name(0)
+        print(f"Using CUDA device: {name}")
+        return "cuda"
+
+    except Exception as exc:
+        print(
+            "CUDA is present but not usable "
+            "(kernel/image mismatch or incompatible driver). "
+            "Falling back to CPU."
+        )
+        print(f"CUDA check error: {exc}")
+        return "cpu"
+
+
+DEVICE = resolve_device()
+
+
+# ============================================================
+# DATA HELPERS
 # ============================================================
 
 def clean_number(value) -> float:
@@ -184,6 +200,7 @@ def clean_number(value) -> float:
 def find_column(
     df: pd.DataFrame,
     candidates: list[str],
+    required: bool = True,
 ) -> Optional[str]:
 
     lookup = {
@@ -191,9 +208,15 @@ def find_column(
         for c in df.columns
     }
 
-    for candidate in candidates:
-        if candidate.lower() in lookup:
-            return lookup[candidate.lower()]
+    for c in candidates:
+        if c.lower() in lookup:
+            return lookup[c.lower()]
+
+    if required:
+        raise ValueError(
+            f"Could not find any of {candidates}. "
+            f"Columns: {list(df.columns)}"
+        )
 
     return None
 
@@ -209,63 +232,73 @@ def load_stock(
 
     raw = pd.read_csv(path)
 
-    date_col = find_column(
+    d = find_column(
         raw,
         ["date", "datetime", "timestamp"],
     )
 
-    close_col = find_column(
+    c = find_column(
         raw,
-        ["close", "close/last", "last", "price"],
+        ["close/last", "close", "last", "price"],
     )
 
-    open_col = find_column(raw, ["open"])
-    high_col = find_column(raw, ["high"])
-    low_col = find_column(raw, ["low"])
-    volume_col = find_column(raw, ["volume"])
+    o = find_column(
+        raw,
+        ["open"],
+        required=False,
+    )
 
-    if date_col is None or close_col is None:
-        raise ValueError(
-            f"{ticker}: date/close not found. "
-            f"Columns={list(raw.columns)}"
-        )
+    h = find_column(
+        raw,
+        ["high"],
+        required=False,
+    )
 
-    data = pd.DataFrame({
+    l = find_column(
+        raw,
+        ["low"],
+        required=False,
+    )
+
+    v = find_column(
+        raw,
+        ["volume"],
+        required=False,
+    )
+
+    out = pd.DataFrame({
         "Date": pd.to_datetime(
-            raw[date_col],
+            raw[d],
             errors="coerce",
         ),
-        f"{ticker}_Close": raw[
-            close_col
-        ].map(clean_number),
+        f"{ticker}_Close": raw[c].map(clean_number),
     })
 
-    # Optional OHLCV.
-    for output_name, source_col in [
-        (f"{ticker}_Open", open_col),
-        (f"{ticker}_High", high_col),
-        (f"{ticker}_Low", low_col),
-        (f"{ticker}_Volume", volume_col),
+    for name, source in [
+        (f"{ticker}_Open", o),
+        (f"{ticker}_High", h),
+        (f"{ticker}_Low", l),
+        (f"{ticker}_Volume", v),
     ]:
-        if source_col is not None:
-            data[output_name] = raw[
-                source_col
-            ].map(clean_number)
+        if source is None:
+            out[name] = np.nan
         else:
-            data[output_name] = np.nan
+            out[name] = raw[source].map(clean_number)
 
-    data = (
-        data
-        .dropna(subset=[
-            "Date",
-            f"{ticker}_Close",
-        ])
+    out = (
+        out
+        .dropna(
+            subset=[
+                "Date",
+                f"{ticker}_Close",
+            ]
+        )
         .sort_values("Date")
         .drop_duplicates("Date")
         .reset_index(drop=True)
     )
 
-    return data
+    return out
 
 
 def load_macro(
@@ -275,16 +308,21 @@ def load_macro(
 
     raw = pd.read_csv(path)
 
-    date_col = find_column(
-        raw,
-        ["date", "datetime", "timestamp", "observation_date"],
-    )
-
-    value_col = find_column(
+    d = find_column(
         raw,
         [
-            "close",
+            "date",
+            "datetime",
+            "timestamp",
+            "observation_date",
+        ],
+    )
+
+    c = find_column(
+        raw,
+        [
             "close/last",
+            "close",
             "last",
             "price",
             "value",
@@ -292,28 +330,22 @@ def load_macro(
         ],
     )
 
-    if date_col is None or value_col is None:
-        raise ValueError(
-            f"{name}: date/value not found. "
-            f"Columns={list(raw.columns)}"
-        )
-
     out = pd.DataFrame({
         "Date": pd.to_datetime(
-            raw[date_col],
+            raw[d],
             errors="coerce",
         ),
-        f"{name}_Close": raw[
-            value_col
-        ].map(clean_number),
+        f"{name}_Close": raw[c].map(clean_number),
     })
 
     return (
         out
-        .dropna(subset=[
-            "Date",
-            f"{name}_Close",
-        ])
+        .dropna(
+            subset=[
+                "Date",
+                f"{name}_Close",
+            ]
+        )
         .sort_values("Date")
         .drop_duplicates("Date")
         .reset_index(drop=True)
@@ -332,33 +364,24 @@ def align_cross_market(
             SPX_FILE,
             "SPX",
         )
-
         vix = load_macro(
             VIX_FILE,
             "VIX",
         )
 
-        out = stock.merge(
-            spx,
-            on="Date",
-            how="inner",
-        )
-
-        out = out.merge(
-            vix,
-            on="Date",
-            how="inner",
-        )
-
-        return (
-            out
+        out = (
+            stock
+            .merge(spx, on="Date", how="inner")
+            .merge(vix, on="Date", how="inner")
             .sort_values("Date")
             .reset_index(drop=True)
         )
 
+        return out
+
     except Exception as exc:
         print(
-            f"    Cross-market alignment failed: {exc}"
+            f"Cross-market alignment failed: {exc}"
         )
         return None
 
@@ -373,42 +396,33 @@ def load_chronos():
         f"\nLoading {CHRONOS_MODEL}..."
     )
 
-    try:
+    pipe = Chronos2Pipeline.from_pretrained(
+        CHRONOS_MODEL,
+        device_map=DEVICE,
+    )
 
-        pipeline = Chronos2Pipeline.from_pretrained(
-            CHRONOS_MODEL,
-            device_map=REQUESTED_DEVICE,
-        )
+    print(
+        f"Chronos-2 loaded on {DEVICE.upper()}."
+    )
 
-        print(
-            f"Chronos-2 loaded on {REQUESTED_DEVICE}"
-        )
+    return pipe
 
-        return pipeline
 
-    except Exception as exc:
+def add_regular_timestamp(
+    history: pd.DataFrame,
+) -> pd.DataFrame:
 
-        if REQUESTED_DEVICE != "cuda":
-            raise
+    out = history.copy()
 
-        print(
-            "CUDA unavailable; falling back to CPU."
-        )
+    # Exactly one regular step per observed market session.
+    # This avoids frequency inference failures caused by weekends/holidays.
+    out["ChronosTime"] = pd.date_range(
+        "2000-01-01",
+        periods=len(out),
+        freq="D",
+    )
 
-        print(
-            f"CUDA error: {exc}"
-        )
-
-        pipeline = Chronos2Pipeline.from_pretrained(
-            CHRONOS_MODEL,
-            device_map="cpu",
-        )
-
-        print(
-            "Chronos-2 loaded on CPU"
-        )
-
-        return pipeline
+    return out
 
 
 def chronos_context(
@@ -417,54 +431,45 @@ def chronos_context(
     covariates: Optional[list[str]] = None,
 ) -> pd.DataFrame:
 
-    if covariates is None:
-        covariates = []
+    covariates = covariates or []
 
-    history = history.tail(
-        CHRONOS_CONTEXT
-    ).copy()
-
-    # Regular synthetic time index.
-    synthetic_time = pd.date_range(
-        start="2000-01-01",
-        periods=len(history),
-        freq="D",
+    h = add_regular_timestamp(
+        history
+        .tail(CHRONOS_CONTEXT)
+        .copy()
     )
 
-    context = pd.DataFrame({
-        "id": [ticker] * len(history),
-        "timestamp": synthetic_time,
-        "target": history[
-            f"{ticker}_Close"
-        ].astype(float).values,
+    target = f"{ticker}_Close"
+
+    out = pd.DataFrame({
+        "id": [ticker] * len(h),
+        "timestamp": h["ChronosTime"].values,
+        "target": h[target].astype(float).values,
     })
 
     for col in covariates:
-        context[col] = (
-            history[col]
-            .astype(float)
-            .values
-        )
+        out[col] = h[col].astype(float).values
 
-    return context
+    return out
 
 
-def chronos_forecast(
-    pipeline,
+def chronos_predict(
+    pipe,
     history: pd.DataFrame,
     ticker: str,
     horizon: int,
     covariates: Optional[list[str]] = None,
-) -> dict:
+) -> pd.DataFrame:
 
-    context = chronos_context(
+    ctx = chronos_context(
         history,
         ticker,
         covariates,
     )
 
-    pred = pipeline.predict_df(
-        context,
+    # This is intentionally kept in the same form as the known-working code.
+    pred = pipe.predict_df(
+        ctx,
         prediction_length=horizon,
         quantile_levels=QUANTILES,
         id_column="id",
@@ -472,17 +477,30 @@ def chronos_forecast(
         target="target",
     )
 
-    return {
-        "p05": float(pred["0.05"].iloc[-1]),
-        "p10": float(pred["0.1"].iloc[-1]),
-        "p50": float(pred["0.5"].iloc[-1]),
-        "p90": float(pred["0.9"].iloc[-1]),
-        "p95": float(pred["0.95"].iloc[-1]),
-    }
+    required = [
+        "0.05",
+        "0.1",
+        "0.5",
+        "0.9",
+        "0.95",
+    ]
+
+    missing = [
+        c for c in required
+        if c not in pred.columns
+    ]
+
+    if missing:
+        raise RuntimeError(
+            "Chronos returned unexpected columns. "
+            f"Missing {missing}; got {list(pred.columns)}"
+        )
+
+    return pred
 
 
 # ============================================================
-# FEATURE ENGINEERING
+# FEATURES FOR ML
 # ============================================================
 
 def build_features(
@@ -491,13 +509,12 @@ def build_features(
     external_columns: Optional[list[str]] = None,
 ) -> pd.DataFrame:
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     out = history.copy()
-
     close = out[f"{ticker}_Close"]
 
+    # Return features.
     out["ret_1"] = close.pct_change(1)
     out["ret_2"] = close.pct_change(2)
     out["ret_3"] = close.pct_change(3)
@@ -505,50 +522,49 @@ def build_features(
     out["ret_10"] = close.pct_change(10)
     out["ret_20"] = close.pct_change(20)
 
+    # OHLCV features.
     out["hl_range"] = (
         out[f"{ticker}_High"]
-        -
-        out[f"{ticker}_Low"]
+        - out[f"{ticker}_Low"]
     ) / close
 
     out["oc_return"] = (
         out[f"{ticker}_Close"]
-        -
-        out[f"{ticker}_Open"]
+        - out[f"{ticker}_Open"]
     ) / out[f"{ticker}_Open"]
 
     out["volume_return"] = (
         out[f"{ticker}_Volume"].pct_change()
     )
 
+    # Volatility.
     out["vol_5"] = (
         out["ret_1"].rolling(5).std()
     )
-
     out["vol_20"] = (
         out["ret_1"].rolling(20).std()
     )
-
     out["vol_60"] = (
         out["ret_1"].rolling(60).std()
     )
 
+    # Momentum.
     out["mom_5"] = (
         close / close.shift(5) - 1
     )
-
     out["mom_20"] = (
         close / close.shift(20) - 1
     )
-
     out["mom_60"] = (
         close / close.shift(60) - 1
     )
 
+    # External market returns.
     for col in external_columns:
 
         prefix = (
-            col.replace("_Close", "")
+            col
+            .replace("_Close", "")
             .lower()
         )
 
@@ -567,12 +583,11 @@ def build_features(
     return out
 
 
-def feature_columns(
+def get_ml_features(
     external_columns: Optional[list[str]] = None,
 ) -> list[str]:
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     features = [
         "ret_1",
@@ -595,7 +610,8 @@ def feature_columns(
     for col in external_columns:
 
         prefix = (
-            col.replace("_Close", "")
+            col
+            .replace("_Close", "")
             .lower()
         )
 
@@ -609,7 +625,7 @@ def feature_columns(
 
 
 # ============================================================
-# NAIVE MODEL
+# STATISTICAL / ML MODELS
 # ============================================================
 
 def naive_forecast(
@@ -624,10 +640,6 @@ def naive_forecast(
     )
 
 
-# ============================================================
-# ARIMA
-# ============================================================
-
 def arima_forecast(
     history: pd.DataFrame,
     ticker: str,
@@ -641,7 +653,8 @@ def arima_forecast(
         .astype(float)
     )
 
-    # ARIMA on log prices.
+    # Work on log prices with one difference.
+    # This is still the classical ARIMA benchmark used in this POC.
     log_price = np.log(close)
 
     model = ARIMA(
@@ -660,10 +673,6 @@ def arima_forecast(
     )
 
 
-# ============================================================
-# ETS
-# ============================================================
-
 def ets_forecast(
     history: pd.DataFrame,
     ticker: str,
@@ -677,8 +686,6 @@ def ets_forecast(
         .astype(float)
     )
 
-    # Multiplicative trend can fail on some series;
-    # use additive trend for robustness.
     model = ExponentialSmoothing(
         close,
         trend="add",
@@ -700,20 +707,16 @@ def ets_forecast(
     )
 
 
-# ============================================================
-# GARCH FAMILY
-# ============================================================
-
 def garch_forecast(
     history: pd.DataFrame,
     ticker: str,
     horizon: int,
-    variant: str = "GARCH",
+    variant: str,
 ) -> tuple[float, float]:
 
     if not ARCH_AVAILABLE:
         raise RuntimeError(
-            "arch package not installed"
+            "arch package is not installed."
         )
 
     close = (
@@ -730,12 +733,8 @@ def garch_forecast(
         * 100.0
     )
 
-    if len(returns) < 100:
-        raise ValueError(
-            "Not enough returns for GARCH."
-        )
-
     if variant == "GARCH":
+
         model = arch_model(
             returns,
             mean="Constant",
@@ -747,6 +746,7 @@ def garch_forecast(
         )
 
     elif variant == "EGARCH":
+
         model = arch_model(
             returns,
             mean="Constant",
@@ -759,6 +759,7 @@ def garch_forecast(
         )
 
     elif variant == "GJR-GARCH":
+
         model = arch_model(
             returns,
             mean="Constant",
@@ -774,17 +775,16 @@ def garch_forecast(
         raise ValueError(variant)
 
     fitted = model.fit(
-        disp="off",
+        disp="off"
     )
 
-    # Mean return forecast.
+    fc = fitted.forecast(
+        horizon=horizon,
+        reindex=False,
+    )
+
     mean_forecast = (
-        fitted
-        .forecast(
-            horizon=horizon,
-            reindex=False,
-        )
-        .mean
+        fc.mean
         .iloc[-1]
         .to_numpy()
     )
@@ -798,19 +798,13 @@ def garch_forecast(
         close.iloc[-1]
     )
 
-    price_forecast = (
+    forecast_price = (
         last_price
         * np.exp(cumulative_return)
     )
 
-    # Average forecast volatility across horizon.
     variance = (
-        fitted
-        .forecast(
-            horizon=horizon,
-            reindex=False,
-        )
-        .variance
+        fc.variance
         .iloc[-1]
         .to_numpy()
     )
@@ -819,31 +813,26 @@ def garch_forecast(
         np.sqrt(
             np.maximum(
                 variance,
-                0,
+                0.0,
             )
         ).mean()
         / 100.0
     )
 
     return (
-        float(price_forecast),
+        float(forecast_price),
         avg_vol,
     )
 
-
-# ============================================================
-# XGBOOST
-# ============================================================
 
 def train_xgb(
     history: pd.DataFrame,
     ticker: str,
     horizon: int,
     external_columns: Optional[list[str]] = None,
-) -> XGBRegressor:
+):
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     data = build_features(
         history,
@@ -851,36 +840,30 @@ def train_xgb(
         external_columns,
     )
 
-    feats = feature_columns(
+    features = get_ml_features(
         external_columns
     )
 
+    target = f"{ticker}_Close"
+
     data["target_return"] = (
-        data[
-            f"{ticker}_Close"
-        ].shift(-horizon)
+        data[target].shift(-horizon)
         /
-        data[
-            f"{ticker}_Close"
-        ]
+        data[target]
         - 1.0
     )
 
     data = data.dropna(
-        subset=feats + ["target_return"]
-    )
-
-    data = data.tail(
-        min(ML_LOOKBACK, len(data))
-    )
+        subset=features + ["target_return"]
+    ).tail(ML_LOOKBACK)
 
     if len(data) < 100:
         raise ValueError(
-            "Not enough data for XGBoost."
+            f"Only {len(data)} clean rows for XGBoost."
         )
 
     X = (
-        data[feats]
+        data[features]
         .apply(pd.to_numeric, errors="coerce")
         .astype(np.float64)
     )
@@ -895,10 +878,8 @@ def train_xgb(
 
     valid = (
         X.notna().all(axis=1)
-        &
-        y.notna()
-        &
-        np.isfinite(y)
+        & y.notna()
+        & np.isfinite(y)
     )
 
     X = X.loc[valid]
@@ -926,13 +907,11 @@ def train_xgb(
 def xgb_forecast(
     history: pd.DataFrame,
     ticker: str,
-    horizon: int,
-    model: XGBRegressor,
+    model,
     external_columns: Optional[list[str]] = None,
 ) -> float:
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     data = build_features(
         history,
@@ -940,15 +919,13 @@ def xgb_forecast(
         external_columns,
     )
 
-    feats = feature_columns(
+    features = get_ml_features(
         external_columns
     )
 
-    latest = data.iloc[-1]
-
     x = (
         pd.to_numeric(
-            latest[feats],
+            data.iloc[-1][features],
             errors="coerce",
         )
         .to_numpy(
@@ -959,28 +936,25 @@ def xgb_forecast(
 
     if not np.isfinite(x).all():
         raise ValueError(
-            "Latest XGBoost features invalid."
+            "Latest XGBoost features contain "
+            "NaN/inf/non-numeric values."
         )
 
     ret = float(
         model.predict(x)[0]
     )
 
-    last_price = float(
+    last = float(
         history[
             f"{ticker}_Close"
         ].iloc[-1]
     )
 
     return (
-        last_price
+        last
         * (1.0 + ret)
     )
 
-
-# ============================================================
-# LIGHTGBM
-# ============================================================
 
 def train_lgbm(
     history: pd.DataFrame,
@@ -991,11 +965,10 @@ def train_lgbm(
 
     if not LIGHTGBM_AVAILABLE:
         raise RuntimeError(
-            "lightgbm package not installed"
+            "lightgbm package is not installed."
         )
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     data = build_features(
         history,
@@ -1003,33 +976,34 @@ def train_lgbm(
         external_columns,
     )
 
-    feats = feature_columns(
+    features = get_ml_features(
         external_columns
     )
 
+    target = f"{ticker}_Close"
+
     data["target_return"] = (
-        data[
-            f"{ticker}_Close"
-        ].shift(-horizon)
+        data[target].shift(-horizon)
         /
-        data[
-            f"{ticker}_Close"
-        ]
+        data[target]
         - 1.0
     )
 
-    data = data.dropna(
-        subset=feats + ["target_return"]
-    ).tail(ML_LOOKBACK)
+    data = (
+        data
+        .dropna(
+            subset=features + ["target_return"]
+        )
+        .tail(ML_LOOKBACK)
+    )
 
-    X = data[feats].astype(float)
+    X = data[features].astype(float)
     y = data["target_return"].astype(float)
 
     model = LGBMRegressor(
         n_estimators=500,
         learning_rate=0.03,
         num_leaves=31,
-        max_depth=-1,
         subsample=0.8,
         colsample_bytree=0.8,
         random_state=42,
@@ -1051,8 +1025,7 @@ def lgbm_forecast(
     external_columns: Optional[list[str]] = None,
 ) -> float:
 
-    if external_columns is None:
-        external_columns = []
+    external_columns = external_columns or []
 
     data = build_features(
         history,
@@ -1060,12 +1033,12 @@ def lgbm_forecast(
         external_columns,
     )
 
-    feats = feature_columns(
+    features = get_ml_features(
         external_columns
     )
 
     x = (
-        data.iloc[-1][feats]
+        data.iloc[-1][features]
         .astype(float)
         .to_numpy()
         .reshape(1, -1)
@@ -1075,20 +1048,16 @@ def lgbm_forecast(
         model.predict(x)[0]
     )
 
-    last_price = float(
+    last = float(
         history[
             f"{ticker}_Close"
         ].iloc[-1]
     )
 
-    return last_price * (
+    return last * (
         1.0 + ret
     )
 
-
-# ============================================================
-# VAR
-# ============================================================
 
 def var_forecast(
     history: pd.DataFrame,
@@ -1096,44 +1065,33 @@ def var_forecast(
     horizon: int,
 ) -> float:
 
-    columns = [
+    cols = [
         f"{ticker}_Close",
         "SPX_Close",
         "VIX_Close",
     ]
 
     if not all(
-        col in history.columns
-        for col in columns
+        c in history.columns
+        for c in cols
     ):
         raise ValueError(
-            "VAR requires stock + SPX + VIX."
+            "VAR requires stock, SPX and VIX."
         )
 
     returns = (
-        np.log(
-            history[columns]
-        )
+        np.log(history[cols])
         .diff()
         .dropna()
-    )
-
-    # Keep VAR manageable.
-    returns = returns.tail(
-        ML_LOOKBACK
+        .tail(ML_LOOKBACK)
     )
 
     if len(returns) < 100:
         raise ValueError(
-            "Not enough data for VAR."
+            "Not enough observations for VAR."
         )
 
-    # Choose lag 5 but cap by available observations.
-    lag = min(5, max(1, len(returns) // 20))
-
-    model = VAR(returns)
-
-    fitted = model.fit(lag)
+    fitted = VAR(returns).fit(5)
 
     fc = fitted.forecast(
         returns.values[-fitted.k_ar:],
@@ -1144,14 +1102,14 @@ def var_forecast(
         fc[:, 0].sum()
     )
 
-    last_price = float(
+    last = float(
         history[
             f"{ticker}_Close"
         ].iloc[-1]
     )
 
     return (
-        last_price
+        last
         * np.exp(
             cumulative_stock_return
         )
@@ -1159,115 +1117,107 @@ def var_forecast(
 
 
 # ============================================================
-# METRICS
+# CUT-OFFS
 # ============================================================
 
-def safe_mae(
-    actual: float,
-    predicted: float,
-) -> float:
+def get_cutoffs(
+    n_rows: int,
+) -> list[int]:
 
-    return abs(
-        actual - predicted
+    required = (
+        MIN_HISTORY
+        +
+        max(HORIZONS)
     )
 
+    if n_rows <= required:
+        raise ValueError(
+            f"Need > {required} rows; "
+            f"got {n_rows}."
+        )
 
-def safe_return_error(
-    last_price: float,
-    actual: float,
-    predicted: float,
-) -> float:
-
-    actual_return = (
-        actual / last_price - 1.0
+    possible = list(
+        range(
+            MIN_HISTORY,
+            n_rows - max(HORIZONS),
+        )
     )
 
-    predicted_return = (
-        predicted / last_price - 1.0
+    if N_WINDOWS is None:
+        return possible
+
+    if len(possible) <= N_WINDOWS:
+        return possible
+
+    idx = np.linspace(
+        0,
+        len(possible) - 1,
+        N_WINDOWS,
+        dtype=int,
     )
 
-    return abs(
-        actual_return
-        -
-        predicted_return
-    )
-
-
-def evaluate_forecast_predictions(
-    records: list[dict],
-) -> pd.DataFrame:
-
-    df = pd.DataFrame(records)
-
-    # Normalized error.
-    df["ml_return_error"] = (
-        df["ml_mae"]
-        /
-        df["last_price"]
-    )
-
-    df["chronos_return_error"] = (
-        df["chronos_mae"]
-        /
-        df["last_price"]
-    )
-
-    return df
+    return [
+        possible[i]
+        for i in idx
+    ]
 
 
 # ============================================================
-# FORECAST BENCHMARK
+# SINGLE FORECAST BENCHMARK
 # ============================================================
 
-def run_stock_benchmark(
-    stock: pd.DataFrame,
+def run_benchmark(
+    df: pd.DataFrame,
     ticker: str,
-    pipeline,
-    experiment_name: str,
+    pipe,
+    experiment: str,
     chronos_covariates: Optional[list[str]] = None,
     ml_external_columns: Optional[list[str]] = None,
 ) -> pd.DataFrame:
 
-    if chronos_covariates is None:
-        chronos_covariates = []
+    chronos_covariates = (
+        chronos_covariates or []
+    )
 
-    if ml_external_columns is None:
-        ml_external_columns = []
+    ml_external_columns = (
+        ml_external_columns or []
+    )
 
     print("\n")
     print("=" * 80)
     print(
-        f"{experiment_name} — {ticker}"
+        f"{experiment} — {ticker}"
     )
     print("=" * 80)
 
-    cutoffs = get_cutoffs(
-        len(stock)
-    )
-
     rows = []
+
+    cutoffs = get_cutoffs(
+        len(df)
+    )
 
     for i, cutoff in enumerate(
         cutoffs,
         start=1,
     ):
 
+        history = df.iloc[
+            :cutoff
+        ].copy()
+
         if (
             i == 1
             or i == len(cutoffs)
             or i % 10 == 0
         ):
+
             print(
                 f"  window {i}/{len(cutoffs)} "
                 f"(cutoff="
-                f"{stock['Date'].iloc[cutoff - 1].date()})"
+                f"{history['Date'].iloc[-1].date()})"
             )
 
-        history = stock.iloc[
-            :cutoff
-        ].copy()
-
-        last_price = float(
+        last = float(
             history[
                 f"{ticker}_Close"
             ].iloc[-1]
@@ -1275,7 +1225,7 @@ def run_stock_benchmark(
 
         for horizon in HORIZONS:
 
-            future = stock.iloc[
+            future = df.iloc[
                 cutoff:
                 cutoff + horizon
             ]
@@ -1286,421 +1236,259 @@ def run_stock_benchmark(
                 ].iloc[-1]
             )
 
-            # --------------------------
-            # Naive
-            # --------------------------
+            predictions = {}
 
-            naive = naive_forecast(
-                history,
-                ticker,
+            # ----------------------
+            # Naive
+            # ----------------------
+
+            predictions["Naive"] = (
+                naive_forecast(
+                    history,
+                    ticker,
+                )
             )
 
-            # --------------------------
+            # ----------------------
             # ARIMA
-            # --------------------------
+            # ----------------------
 
             try:
-                arima = arima_forecast(
-                    history,
-                    ticker,
-                    horizon,
-                )
-            except Exception:
-                arima = np.nan
-
-            # --------------------------
-            # ETS
-            # --------------------------
-
-            try:
-                ets = ets_forecast(
-                    history,
-                    ticker,
-                    horizon,
-                )
-            except Exception:
-                ets = np.nan
-
-            # --------------------------
-            # GARCH
-            # --------------------------
-
-            garch_price = np.nan
-            garch_vol = np.nan
-
-            if ARCH_AVAILABLE:
-                try:
-                    (
-                        garch_price,
-                        garch_vol,
-                    ) = garch_forecast(
+                predictions["ARIMA"] = (
+                    arima_forecast(
                         history,
                         ticker,
                         horizon,
-                        "GARCH",
                     )
-                except Exception:
-                    pass
+                )
+            except Exception as exc:
+                predictions["ARIMA"] = np.nan
 
-            # --------------------------
-            # EGARCH
-            # --------------------------
+            # ----------------------
+            # ETS
+            # ----------------------
 
-            egarch_price = np.nan
+            try:
+                predictions["ETS"] = (
+                    ets_forecast(
+                        history,
+                        ticker,
+                        horizon,
+                    )
+                )
+            except Exception:
+                predictions["ETS"] = np.nan
 
-            if ARCH_AVAILABLE:
-                try:
-                    egarch_price, _ = (
-                        garch_forecast(
+            # ----------------------
+            # GARCH family
+            # ----------------------
+
+            for name in [
+                "GARCH",
+                "EGARCH",
+                "GJR-GARCH",
+            ]:
+
+                predictions[name] = np.nan
+
+                if ARCH_AVAILABLE:
+
+                    try:
+
+                        p, _ = garch_forecast(
                             history,
                             ticker,
                             horizon,
-                            "EGARCH",
+                            name,
                         )
-                    )
-                except Exception:
-                    pass
 
-            # --------------------------
-            # GJR-GARCH
-            # --------------------------
+                        predictions[name] = p
 
-            gjr_price = np.nan
+                    except Exception:
+                        pass
 
-            if ARCH_AVAILABLE:
-                try:
-                    gjr_price, _ = (
-                        garch_forecast(
-                            history,
-                            ticker,
-                            horizon,
-                            "GJR-GARCH",
-                        )
-                    )
-                except Exception:
-                    pass
-
-            # --------------------------
+            # ----------------------
             # XGBoost
-            # --------------------------
+            # ----------------------
 
             try:
 
-                xgb_model = train_xgb(
+                model = train_xgb(
                     history,
                     ticker,
                     horizon,
                     ml_external_columns,
                 )
 
-                xgb = xgb_forecast(
-                    history,
-                    ticker,
-                    horizon,
-                    xgb_model,
-                    ml_external_columns,
+                predictions["XGBoost"] = (
+                    xgb_forecast(
+                        history,
+                        ticker,
+                        model,
+                        ml_external_columns,
+                    )
                 )
 
             except Exception:
+                predictions["XGBoost"] = np.nan
 
-                xgb = np.nan
-
-            # --------------------------
+            # ----------------------
             # LightGBM
-            # --------------------------
+            # ----------------------
 
-            lgbm = np.nan
+            predictions["LightGBM"] = np.nan
 
             if LIGHTGBM_AVAILABLE:
+
                 try:
 
-                    lgbm_model = train_lgbm(
+                    model = train_lgbm(
                         history,
                         ticker,
                         horizon,
                         ml_external_columns,
                     )
 
-                    lgbm = lgbm_forecast(
-                        history,
-                        ticker,
-                        lgbm_model,
-                        ml_external_columns,
+                    predictions["LightGBM"] = (
+                        lgbm_forecast(
+                            history,
+                            ticker,
+                            model,
+                            ml_external_columns,
+                        )
                     )
 
                 except Exception:
                     pass
 
-            # --------------------------
+            # ----------------------
             # VAR
-            # --------------------------
+            # ----------------------
 
-            var = np.nan
+            predictions["VAR"] = np.nan
 
             if "SPX_Close" in history.columns:
+
                 try:
-                    var = var_forecast(
-                        history,
-                        ticker,
-                        horizon,
+
+                    predictions["VAR"] = (
+                        var_forecast(
+                            history,
+                            ticker,
+                            horizon,
+                        )
                     )
+
                 except Exception:
                     pass
 
-            # --------------------------
-            # Chronos
-            # --------------------------
+            # ----------------------
+            # Chronos-2
+            # ----------------------
 
-            try:
+            # DO NOT swallow the Chronos exception.
+            # During benchmark validation, a Chronos failure should stop
+            # the run and show the actual root cause.
+            cp = chronos_predict(
+                pipe,
+                history,
+                ticker,
+                horizon,
+                chronos_covariates,
+            )
 
-                cp = chronos_forecast(
-                    pipeline,
-                    history,
-                    ticker,
-                    horizon,
-                    chronos_covariates,
-                )
+            p10 = float(
+                cp["0.1"].iloc[-1]
+            )
 
-            except Exception:
+            p50 = float(
+                cp["0.5"].iloc[-1]
+            )
 
-                cp = {
-                    "p05": np.nan,
-                    "p10": np.nan,
-                    "p50": np.nan,
-                    "p90": np.nan,
-                    "p95": np.nan,
-                }
+            p90 = float(
+                cp["0.9"].iloc[-1]
+            )
 
-            rows.append({
+            predictions["Chronos-2"] = p50
+
+            row = {
                 "ticker": ticker,
-                "experiment": experiment_name,
+                "experiment": experiment,
                 "cutoff_date":
                     history["Date"].iloc[-1],
                 "horizon": horizon,
-
-                "last_price": last_price,
+                "last_price": last,
                 "actual": actual,
+                **predictions,
+                "Chronos_P10": p10,
+                "Chronos_P90": p90,
+            }
 
-                "naive": naive,
+            # Every model gets the same metrics.
+            for model_name, prediction in predictions.items():
 
-                "arima": arima,
-                "ets": ets,
+                if pd.isna(prediction):
+                    row[f"{model_name}_price_mae"] = np.nan
+                    row[f"{model_name}_return_abs_error"] = np.nan
+                    row[f"{model_name}_direction_hit"] = np.nan
+                    continue
 
-                "garch": garch_price,
-                "egarch": egarch_price,
-                "gjr_garch": gjr_price,
+                row[f"{model_name}_price_mae"] = (
+                    abs(
+                        actual - prediction
+                    )
+                )
 
-                "var": var,
+                actual_return = (
+                    actual / last - 1.0
+                )
 
-                "xgboost": xgb,
-                "lightgbm": lgbm,
+                predicted_return = (
+                    prediction / last - 1.0
+                )
 
-                "chronos_p05": cp["p05"],
-                "chronos_p10": cp["p10"],
-                "chronos_p50": cp["p50"],
-                "chronos_p90": cp["p90"],
-                "chronos_p95": cp["p95"],
-            })
+                row[f"{model_name}_return_abs_error"] = (
+                    abs(
+                        actual_return
+                        -
+                        predicted_return
+                    )
+                )
+
+                row[f"{model_name}_direction_hit"] = (
+                    float(
+                        np.sign(actual_return)
+                        ==
+                        np.sign(predicted_return)
+                    )
+                )
+
+            # Chronos coverage.
+            actual_return = (
+                actual / last - 1
+            )
+
+            p10_return = (
+                p10 / last - 1
+            )
+
+            p90_return = (
+                p90 / last - 1
+            )
+
+            row["Chronos_P10_breach"] = (
+                actual_return < p10_return
+            )
+
+            row["Chronos_P90_breach"] = (
+                actual_return > p90_return
+            )
+
+            rows.append(row)
 
     result = pd.DataFrame(rows)
 
     return result
-
-
-# ============================================================
-# CONVERT TO LONG FORMAT / SCORE
-# ============================================================
-
-FORECAST_COLUMNS = [
-    "naive",
-    "arima",
-    "ets",
-    "garch",
-    "egarch",
-    "gjr_garch",
-    "var",
-    "xgboost",
-    "lightgbm",
-    "chronos_p50",
-]
-
-
-def score_forecasts(
-    result: pd.DataFrame,
-) -> pd.DataFrame:
-
-    rows = []
-
-    for _, row in result.iterrows():
-
-        actual = row["actual"]
-        last = row["last_price"]
-
-        for model_name in FORECAST_COLUMNS:
-
-            predicted = row[model_name]
-
-            if pd.isna(predicted):
-                continue
-
-            rows.append({
-                "ticker":
-                    row["ticker"],
-
-                "experiment":
-                    row["experiment"],
-
-                "cutoff_date":
-                    row["cutoff_date"],
-
-                "horizon":
-                    row["horizon"],
-
-                "model":
-                    model_name,
-
-                "actual":
-                    actual,
-
-                "predicted":
-                    predicted,
-
-                "price_mae":
-                    abs(
-                        actual
-                        - predicted
-                    ),
-
-                "return_abs_error":
-                    safe_return_error(
-                        last,
-                        actual,
-                        predicted,
-                    ),
-
-                "direction_hit":
-                    float(
-                        np.sign(
-                            actual / last - 1
-                        )
-                        ==
-                        np.sign(
-                            predicted / last - 1
-                        )
-                    ),
-            })
-
-    return pd.DataFrame(rows)
-
-
-def aggregate_scores(
-    scored: pd.DataFrame,
-) -> pd.DataFrame:
-
-    return (
-        scored
-        .groupby([
-            "ticker",
-            "experiment",
-            "horizon",
-            "model",
-        ])
-        .agg(
-            observations=(
-                "price_mae",
-                "size",
-            ),
-
-            mean_price_mae=(
-                "price_mae",
-                "mean",
-            ),
-
-            median_price_mae=(
-                "price_mae",
-                "median",
-            ),
-
-            mean_return_abs_error=(
-                "return_abs_error",
-                "mean",
-            ),
-
-            directional_accuracy=(
-                "direction_hit",
-                "mean",
-            ),
-        )
-        .reset_index()
-    )
-
-
-# ============================================================
-# CHRONOS CALIBRATION
-# ============================================================
-
-def evaluate_chronos_quantiles(
-    result: pd.DataFrame,
-) -> pd.DataFrame:
-
-    rows = []
-
-    for (
-        ticker,
-        experiment,
-        horizon,
-    ), group in result.groupby([
-        "ticker",
-        "experiment",
-        "horizon",
-    ]):
-
-        actual = group["actual"].to_numpy()
-
-        for q, col in [
-            (0.10, "chronos_p10"),
-            (0.90, "chronos_p90"),
-        ]:
-
-            pred = group[col].to_numpy()
-
-            valid = (
-                np.isfinite(actual)
-                &
-                np.isfinite(pred)
-            )
-
-            actual_v = actual[valid]
-            pred_v = pred[valid]
-
-            if len(actual_v) == 0:
-                continue
-
-            if q == 0.10:
-
-                breach = (
-                    actual_v < pred_v
-                )
-
-            else:
-
-                breach = (
-                    actual_v > pred_v
-                )
-
-            rows.append({
-                "ticker": ticker,
-                "experiment": experiment,
-                "horizon": horizon,
-                "quantile": q,
-                "expected_breach_rate": 1 - q,
-                "actual_breach_rate":
-                    float(breach.mean()),
-                "n":
-                    len(actual_v),
-            })
-
-    return pd.DataFrame(rows)
 
 
 # ============================================================
@@ -1710,7 +1498,7 @@ def evaluate_chronos_quantiles(
 def run_spike_test(
     stock: pd.DataFrame,
     ticker: str,
-    pipeline,
+    pipe,
 ) -> pd.DataFrame:
 
     print("\n")
@@ -1720,24 +1508,34 @@ def run_spike_test(
     )
     print("=" * 80)
 
-    cutoffs = get_cutoffs(
-        len(stock)
+    d = stock.copy()
+
+    d["ret"] = (
+        d[
+            f"{ticker}_Close"
+        ].pct_change()
+    )
+
+    d["vol20"] = (
+        d["ret"].rolling(20).std()
     )
 
     rows = []
 
-    for cutoff in cutoffs:
+    for cutoff in get_cutoffs(
+        len(d)
+    ):
 
-        history = stock.iloc[
+        hist = d.iloc[
             :cutoff
         ].copy()
 
-        future = stock.iloc[
+        future = d.iloc[
             cutoff
         ]
 
         last = float(
-            history[
+            hist[
                 f"{ticker}_Close"
             ].iloc[-1]
         )
@@ -1752,16 +1550,8 @@ def run_spike_test(
             actual / last - 1
         )
 
-        returns = (
-            history[
-                f"{ticker}_Close"
-            ]
-            .pct_change()
-            .dropna()
-        )
-
         vol = float(
-            returns.tail(20).std()
+            hist["vol20"].iloc[-1]
         )
 
         if not np.isfinite(vol) or vol <= 0:
@@ -1777,65 +1567,64 @@ def run_spike_test(
             threshold
         )
 
-        # XGBoost
-        xgb_return = np.nan
-
+        # XGBoost warning.
         try:
 
             model = train_xgb(
-                history,
+                hist,
                 ticker,
                 horizon=1,
             )
 
             pred = xgb_forecast(
-                history,
+                hist,
                 ticker,
-                horizon=1,
-                model=model,
+                model,
             )
 
             xgb_return = (
                 pred / last - 1
             )
 
-        except Exception:
-            pass
-
-        # Chronos
-        try:
-
-            cp = chronos_forecast(
-                pipeline,
-                history,
-                ticker,
-                horizon=1,
-            )
-
-            p10_return = (
-                cp["p10"] / last - 1
-            )
-
-            p90_return = (
-                cp["p90"] / last - 1
-            )
-
-            chronos_warning = (
-                p10_return < -threshold
-                or
-                p90_return > threshold
+            xgb_warning = (
+                abs(xgb_return)
+                >
+                threshold
             )
 
         except Exception:
 
-            p10_return = np.nan
-            p90_return = np.nan
-            chronos_warning = False
+            xgb_return = np.nan
+            xgb_warning = False
 
-        xgb_warning = (
-            np.isfinite(xgb_return)
-            and
-            abs(xgb_return) > threshold
+        # Chronos warning.
+        cp = chronos_predict(
+            pipe,
+            hist,
+            ticker,
+            horizon=1,
+        )
+
+        p10_return = (
+            float(
+                cp["0.1"].iloc[-1]
+            )
+            / last
+            - 1
+        )
+
+        p90_return = (
+            float(
+                cp["0.9"].iloc[-1]
+            )
+            / last
+            - 1
+        )
+
+        chronos_warning = (
+            p10_return < -threshold
+            or
+            p90_return > threshold
         )
 
         rows.append({
@@ -1844,8 +1633,6 @@ def run_spike_test(
                 future["Date"],
             "actual_return":
                 actual_return,
-            "rolling_vol":
-                vol,
             "threshold":
                 threshold,
             "actual_spike":
@@ -1859,42 +1646,28 @@ def run_spike_test(
     return pd.DataFrame(rows)
 
 
-def precision_recall(
+def spike_metrics(
     actual: pd.Series,
-    predicted: pd.Series,
-) -> tuple[float, float, int, int, int]:
+    pred: pd.Series,
+) -> dict:
 
-    actual = (
+    a = (
         actual
         .fillna(False)
         .astype(bool)
         .to_numpy()
     )
 
-    predicted = (
-        predicted
+    p = (
+        pred
         .fillna(False)
         .astype(bool)
         .to_numpy()
     )
 
-    tp = int(
-        np.sum(
-            actual & predicted
-        )
-    )
-
-    fp = int(
-        np.sum(
-            ~actual & predicted
-        )
-    )
-
-    fn = int(
-        np.sum(
-            actual & ~predicted
-        )
-    )
+    tp = int(np.sum(a & p))
+    fp = int(np.sum(~a & p))
+    fn = int(np.sum(a & ~p))
 
     precision = (
         tp / (tp + fp)
@@ -1908,68 +1681,23 @@ def precision_recall(
         else 0.0
     )
 
-    return (
-        precision,
-        recall,
-        tp,
-        fp,
-        fn,
-    )
-
-
-def summarize_spikes(
-    all_spikes: pd.DataFrame,
-) -> pd.DataFrame:
-
-    rows = []
-
-    for ticker, group in all_spikes.groupby(
-        "ticker"
-    ):
-
-        for model, column in [
-            ("XGBoost", "xgb_warning"),
-            ("Chronos-2", "chronos_warning"),
-        ]:
-
-            (
-                precision,
-                recall,
-                tp,
-                fp,
-                fn,
-            ) = precision_recall(
-                group["actual_spike"],
-                group[column],
-            )
-
-            rows.append({
-                "ticker": ticker,
-                "model": model,
-                "actual_spikes":
-                    int(
-                        group[
-                            "actual_spike"
-                        ].sum()
-                    ),
-                "precision": precision,
-                "recall": recall,
-                "tp": tp,
-                "fp": fp,
-                "fn": fn,
-            })
-
-    return pd.DataFrame(rows)
+    return {
+        "precision": precision,
+        "recall": recall,
+        "tp": tp,
+        "fp": fp,
+        "fn": fn,
+    }
 
 
 # ============================================================
-# COLD START EXPERIMENT
+# COLD START
 # ============================================================
 
 def run_cold_start(
     stock: pd.DataFrame,
     ticker: str,
-    pipeline,
+    pipe,
 ) -> pd.DataFrame:
 
     print("\n")
@@ -1983,14 +1711,15 @@ def run_cold_start(
 
     for history_length in COLD_START_LENGTHS:
 
-        if len(stock) <= (
+        max_required = (
             history_length
             +
             max(HORIZONS)
-        ):
+        )
+
+        if len(stock) <= max_required:
             continue
 
-        # Use many launch dates, sampled across the series.
         possible = np.arange(
             history_length,
             len(stock)
@@ -2001,13 +1730,21 @@ def run_cold_start(
         if len(possible) == 0:
             continue
 
-        if N_WINDOWS is not None:
+        if N_WINDOWS is None:
+
+            cutoffs = [
+                int(x)
+                for x in possible
+            ]
+
+        else:
+
             n = min(
                 N_WINDOWS,
                 len(possible),
             )
 
-            positions = np.linspace(
+            idx = np.linspace(
                 0,
                 len(possible) - 1,
                 n,
@@ -2016,13 +1753,7 @@ def run_cold_start(
 
             cutoffs = [
                 int(possible[i])
-                for i in positions
-            ]
-
-        else:
-            cutoffs = [
-                int(x)
-                for x in possible
+                for i in idx
             ]
 
         for cutoff in cutoffs:
@@ -2030,6 +1761,11 @@ def run_cold_start(
             history = stock.iloc[
                 :cutoff
             ].copy()
+
+            # Restrict model context to the requested cold-start history.
+            history = history.tail(
+                history_length
+            ).copy()
 
             last = float(
                 history[
@@ -2050,16 +1786,10 @@ def run_cold_start(
                     ].iloc[-1]
                 )
 
-                # ----------------------
-                # Naive
-                # ----------------------
-
+                # Naive.
                 naive = last
 
-                # ----------------------
-                # ARIMA
-                # ----------------------
-
+                # ARIMA.
                 try:
                     arima = arima_forecast(
                         history,
@@ -2069,13 +1799,10 @@ def run_cold_start(
                 except Exception:
                     arima = np.nan
 
-                # ----------------------
-                # XGBoost
-                # ----------------------
-
+                # XGBoost.
                 try:
 
-                    model = train_xgb(
+                    xgb_model = train_xgb(
                         history,
                         ticker,
                         horizon,
@@ -2084,151 +1811,286 @@ def run_cold_start(
                     xgb = xgb_forecast(
                         history,
                         ticker,
-                        horizon,
-                        model,
+                        xgb_model,
                     )
 
                 except Exception:
 
                     xgb = np.nan
 
-                # ----------------------
-                # Chronos
-                # ----------------------
+                # Chronos.
+                cp = chronos_predict(
+                    pipe,
+                    history,
+                    ticker,
+                    horizon,
+                )
 
-                try:
+                chronos = float(
+                    cp["0.5"].iloc[-1]
+                )
 
-                    cp = chronos_forecast(
-                        pipeline,
-                        history,
-                        ticker,
-                        horizon,
-                    )
-
-                    chronos = cp["p50"]
-
-                except Exception:
-
-                    chronos = np.nan
-
-                for model_name, predicted in [
+                for model_name, prediction in [
                     ("Naive", naive),
                     ("ARIMA", arima),
                     ("XGBoost", xgb),
                     ("Chronos-2", chronos),
                 ]:
 
-                    if pd.isna(predicted):
+                    if pd.isna(prediction):
                         continue
 
                     rows.append({
                         "ticker":
                             ticker,
-
                         "history_length":
                             history_length,
-
                         "cutoff_date":
                             history["Date"].iloc[-1],
-
                         "horizon":
                             horizon,
-
                         "model":
                             model_name,
-
                         "last_price":
                             last,
-
                         "actual":
                             actual,
-
                         "predicted":
-                            predicted,
-
+                            prediction,
                         "price_mae":
                             abs(
                                 actual
-                                - predicted
+                                -
+                                prediction
                             ),
-
                         "return_abs_error":
                             safe_return_error(
                                 last,
                                 actual,
-                                predicted,
+                                prediction,
                             ),
                     })
 
     return pd.DataFrame(rows)
 
 
-# ============================================================
-# CUT OFF GENERATOR
-# ============================================================
+def safe_return_error(
+    last_price: float,
+    actual: float,
+    predicted: float,
+) -> float:
 
-def get_cutoffs(
-    n_rows: int,
-) -> list[int]:
-
-    required = (
-        MIN_HISTORY
-        +
-        max(HORIZONS)
+    actual_return = (
+        actual / last_price - 1
     )
 
-    if n_rows <= required:
-        raise ValueError(
-            f"{n_rows} rows available; "
-            f"need > {required}"
+    predicted_return = (
+        predicted / last_price - 1
+    )
+
+    return abs(
+        actual_return
+        -
+        predicted_return
+    )
+
+
+# ============================================================
+# SUMMARY
+# ============================================================
+
+MODEL_NAMES = [
+    "Naive",
+    "ARIMA",
+    "ETS",
+    "GARCH",
+    "EGARCH",
+    "GJR-GARCH",
+    "VAR",
+    "XGBoost",
+    "LightGBM",
+    "Chronos-2",
+]
+
+
+def long_score_table(
+    all_forecasts: pd.DataFrame,
+) -> pd.DataFrame:
+
+    rows = []
+
+    for _, row in all_forecasts.iterrows():
+
+        for model in MODEL_NAMES:
+
+            value = row.get(
+                model,
+                np.nan,
+            )
+
+            if pd.isna(value):
+                continue
+
+            rows.append({
+                "ticker":
+                    row["ticker"],
+                "experiment":
+                    row["experiment"],
+                "cutoff_date":
+                    row["cutoff_date"],
+                "horizon":
+                    row["horizon"],
+                "model":
+                    model,
+                "actual":
+                    row["actual"],
+                "prediction":
+                    value,
+                "price_mae":
+                    row.get(
+                        f"{model}_price_mae",
+                        np.nan,
+                    ),
+                "return_abs_error":
+                    row.get(
+                        f"{model}_return_abs_error",
+                        np.nan,
+                    ),
+                "direction_hit":
+                    row.get(
+                        f"{model}_direction_hit",
+                        np.nan,
+                    ),
+            })
+
+    return pd.DataFrame(rows)
+
+
+def summarize(
+    scored: pd.DataFrame,
+) -> pd.DataFrame:
+
+    return (
+        scored
+        .groupby([
+            "experiment",
+            "ticker",
+            "horizon",
+            "model",
+        ])
+        .agg(
+            observations=(
+                "price_mae",
+                "size",
+            ),
+            mean_price_mae=(
+                "price_mae",
+                "mean",
+            ),
+            median_price_mae=(
+                "price_mae",
+                "median",
+            ),
+            mean_return_abs_error=(
+                "return_abs_error",
+                "mean",
+            ),
+            directional_accuracy=(
+                "direction_hit",
+                "mean",
+            ),
         )
-
-    possible = np.arange(
-        MIN_HISTORY,
-        n_rows - max(HORIZONS),
+        .reset_index()
     )
 
-    if N_WINDOWS is None:
-        return [
-            int(x)
-            for x in possible
-        ]
 
-    if len(possible) <= N_WINDOWS:
-        return [
-            int(x)
-            for x in possible
-        ]
+def summarize_overall(
+    summary: pd.DataFrame,
+) -> pd.DataFrame:
 
-    positions = np.linspace(
-        0,
-        len(possible) - 1,
-        N_WINDOWS,
-        dtype=int,
+    return (
+        summary
+        .groupby([
+            "experiment",
+            "horizon",
+            "model",
+        ])
+        .agg(
+            stocks=(
+                "ticker",
+                "nunique",
+            ),
+            observations=(
+                "observations",
+                "sum",
+            ),
+            avg_price_mae=(
+                "mean_price_mae",
+                "mean",
+            ),
+            median_price_mae=(
+                "mean_price_mae",
+                "median",
+            ),
+            avg_return_abs_error=(
+                "mean_return_abs_error",
+                "mean",
+            ),
+            avg_directional_accuracy=(
+                "directional_accuracy",
+                "mean",
+            ),
+        )
+        .reset_index()
     )
 
-    return [
-        int(possible[i])
-        for i in positions
-    ]
+
+def chronos_coverage(
+    all_forecasts: pd.DataFrame,
+) -> pd.DataFrame:
+
+    valid = all_forecasts.copy()
+
+    return (
+        valid
+        .groupby([
+            "experiment",
+            "ticker",
+            "horizon",
+        ])
+        .agg(
+            observations=(
+                "actual",
+                "size",
+            ),
+            p10_breach_rate=(
+                "Chronos_P10_breach",
+                "mean",
+            ),
+            p90_breach_rate=(
+                "Chronos_P90_breach",
+                "mean",
+            ),
+        )
+        .reset_index()
+    )
 
 
 # ============================================================
-# VISUALIZATION
+# PLOT
 # ============================================================
 
-def plot_example(
+def plot_aapl_example(
     stock: pd.DataFrame,
-    ticker: str,
-    pipeline,
+    pipe,
 ) -> None:
 
-    horizon = 20
-
     if len(stock) <= (
-        MIN_HISTORY + horizon
+        MIN_HISTORY + 20
     ):
         return
+
+    horizon = 20
 
     cutoff = len(stock) - horizon
 
@@ -2240,34 +2102,37 @@ def plot_example(
         cutoff:
     ].copy()
 
-    try:
+    cp = chronos_predict(
+        pipe,
+        history,
+        "AAPL",
+        horizon,
+    )
 
-        xgb_model = train_xgb(
+    chronos_p10 = cp["0.1"].values
+    chronos_p50 = cp["0.5"].values
+    chronos_p90 = cp["0.9"].values
+
+    xgb_values = []
+
+    for h in range(
+        1,
+        horizon + 1,
+    ):
+
+        model = train_xgb(
             history,
-            ticker,
-            horizon,
+            "AAPL",
+            h,
         )
 
-        xgb = xgb_forecast(
-            history,
-            ticker,
-            horizon,
-            xgb_model,
+        xgb_values.append(
+            xgb_forecast(
+                history,
+                "AAPL",
+                model,
+            )
         )
-
-        cp = chronos_forecast(
-            pipeline,
-            history,
-            ticker,
-            horizon,
-        )
-
-    except Exception as exc:
-
-        print(
-            f"Plot failed for {ticker}: {exc}"
-        )
-        return
 
     plt.figure(
         figsize=(14, 7)
@@ -2276,50 +2141,38 @@ def plot_example(
     plt.plot(
         history["Date"].tail(100),
         history[
-            f"{ticker}_Close"
+            "AAPL_Close"
         ].tail(100),
         label="Known history",
     )
 
     plt.plot(
         future["Date"],
-        future[
-            f"{ticker}_Close"
-        ],
+        future["AAPL_Close"],
         linewidth=3,
         label="Actual future",
     )
 
     plt.plot(
         future["Date"],
-        np.repeat(
-            xgb,
-            len(future),
-        ),
+        xgb_values,
         linestyle="--",
-        label="XGBoost 20D endpoint",
+        label="XGBoost direct horizon",
     )
 
     plt.plot(
         future["Date"],
-        np.repeat(
-            cp["p50"],
-            len(future),
-        ),
+        chronos_p50,
         linestyle="--",
-        label="Chronos P50 endpoint",
+        label="Chronos P50",
     )
 
-    plt.axhline(
-        cp["p10"],
-        linestyle=":",
-        label="Chronos P10",
-    )
-
-    plt.axhline(
-        cp["p90"],
-        linestyle=":",
-        label="Chronos P90",
+    plt.fill_between(
+        future["Date"],
+        chronos_p10,
+        chronos_p90,
+        alpha=0.20,
+        label="Chronos P10-P90",
     )
 
     plt.axvline(
@@ -2329,19 +2182,18 @@ def plot_example(
     )
 
     plt.title(
-        f"{ticker} — Chronos-2 vs XGBoost"
+        "AAPL — Chronos-2 vs Statistical / ML Models"
     )
 
     plt.xlabel("Date")
     plt.ylabel("Price")
-
     plt.legend()
-
     plt.tight_layout()
 
     plt.savefig(
         RESULTS_DIR
-        / f"{ticker}_forecast_example.png",
+        /
+        "AAPL_forecast_example.png",
         dpi=150,
     )
 
@@ -2360,12 +2212,20 @@ def main():
     )
 
     print("=" * 80)
-    print("CHRONOS-2 vs STATISTICAL MODELS")
-    print("10-STOCK FINANCIAL FORECASTING POC")
+    print(
+        "CHRONOS-2 vs STATISTICAL / ML MODELS"
+    )
+    print(
+        "10-STOCK FINANCIAL FORECASTING POC"
+    )
     print("=" * 80)
 
     print(
-        f"\nARCH package available: "
+        f"\nDevice: {DEVICE}"
+    )
+
+    print(
+        f"ARCH available: "
         f"{ARCH_AVAILABLE}"
     )
 
@@ -2374,11 +2234,11 @@ def main():
         f"{LIGHTGBM_AVAILABLE}"
     )
 
-    pipeline = load_chronos()
+    pipe = load_chronos()
 
-    all_results = []
+    all_forecasts = []
     all_spikes = []
-    all_cold_start = []
+    all_cold = []
 
     evaluated = []
 
@@ -2394,24 +2254,13 @@ def main():
 
             print(
                 f"\nSkipping {ticker}: "
-                f"{path} not found."
+                f"{path} missing."
             )
-
             continue
 
-        try:
-
-            stock = load_stock(
-                ticker
-            )
-
-        except Exception as exc:
-
-            print(
-                f"\nSkipping {ticker}: {exc}"
-            )
-
-            continue
+        stock = load_stock(
+            ticker
+        )
 
         print("\n")
         print("-" * 80)
@@ -2430,34 +2279,37 @@ def main():
         ):
 
             print(
-                "  Not enough history; skipping."
+                "  Not enough history."
             )
-
             continue
 
-        evaluated.append(ticker)
+        evaluated.append(
+            ticker
+        )
 
         # ----------------------------------------------------
-        # Experiment 1
+        # EXPERIMENT 1
         # ----------------------------------------------------
 
-        e1 = run_stock_benchmark(
+        e1 = run_benchmark(
             stock,
             ticker,
-            pipeline,
+            pipe,
             "Experiment 1 — Univariate Close",
         )
 
-        all_results.append(e1)
+        all_forecasts.append(
+            e1
+        )
 
         # ----------------------------------------------------
-        # Experiment 2
+        # EXPERIMENT 2
         # ----------------------------------------------------
 
-        e2 = run_stock_benchmark(
+        e2 = run_benchmark(
             stock,
             ticker,
-            pipeline,
+            pipe,
             "Experiment 2 — OHLCV",
             chronos_covariates=[
                 f"{ticker}_Open",
@@ -2467,10 +2319,12 @@ def main():
             ],
         )
 
-        all_results.append(e2)
+        all_forecasts.append(
+            e2
+        )
 
         # ----------------------------------------------------
-        # Experiment 3
+        # EXPERIMENT 3
         # ----------------------------------------------------
 
         cross = align_cross_market(
@@ -2486,10 +2340,10 @@ def main():
             )
         ):
 
-            e3 = run_stock_benchmark(
+            e3 = run_benchmark(
                 cross,
                 ticker,
-                pipeline,
+                pipe,
                 "Experiment 3 — Cross Market",
                 chronos_covariates=[
                     "SPX_Close",
@@ -2501,100 +2355,118 @@ def main():
                 ],
             )
 
-            all_results.append(e3)
+            all_forecasts.append(
+                e3
+            )
 
         # ----------------------------------------------------
-        # Spike test
+        # SPIKE
         # ----------------------------------------------------
 
-        spike = run_spike_test(
+        spikes = run_spike_test(
             stock,
             ticker,
-            pipeline,
+            pipe,
         )
 
         all_spikes.append(
-            spike
+            spikes
         )
 
         # ----------------------------------------------------
-        # Cold-start
+        # COLD START
         # ----------------------------------------------------
 
         cold = run_cold_start(
             stock,
             ticker,
-            pipeline,
+            pipe,
         )
 
-        all_cold_start.append(
+        all_cold.append(
             cold
         )
 
         # ----------------------------------------------------
-        # Plot
+        # AAPL plot only
         # ----------------------------------------------------
 
-        plot_example(
-            stock,
-            ticker,
-            pipeline,
-        )
+        if ticker == "AAPL":
+            plot_aapl_example(
+                stock,
+                pipe,
+            )
 
     # ========================================================
-    # SAVE FORECAST RESULTS
+    # FORECAST RESULTS
     # ========================================================
 
-    print("\n")
-    print("=" * 80)
-    print("SAVING RESULTS")
-    print("=" * 80)
+    if all_forecasts:
 
-    if all_results:
-
-        result = pd.concat(
-            all_results,
+        forecasts = pd.concat(
+            all_forecasts,
             ignore_index=True,
         )
 
-        result.to_csv(
+        forecasts.to_csv(
             RESULTS_DIR
-            / "all_forecasts.csv",
+            /
+            "all_forecasts.csv",
             index=False,
         )
 
-        scored = score_forecasts(
-            result
+        scored = long_score_table(
+            forecasts
         )
 
         scored.to_csv(
             RESULTS_DIR
-            / "all_scored_forecasts.csv",
+            /
+            "all_scored_forecasts.csv",
             index=False,
         )
 
-        aggregate = aggregate_scores(
+        summary = summarize(
             scored
         )
 
-        aggregate.to_csv(
+        summary.to_csv(
             RESULTS_DIR
-            / "model_comparison.csv",
+            /
+            "model_comparison_by_stock.csv",
             index=False,
         )
 
-        coverage = evaluate_chronos_quantiles(
-            result
+        overall = summarize_overall(
+            summary
+        )
+
+        overall.to_csv(
+            RESULTS_DIR
+            /
+            "model_comparison_overall.csv",
+            index=False,
+        )
+
+        coverage = chronos_coverage(
+            forecasts
         )
 
         coverage.to_csv(
             RESULTS_DIR
-            / "chronos_coverage.csv",
+            /
+            "chronos_coverage.csv",
             index=False,
         )
 
+    else:
+
+        forecasts = pd.DataFrame()
+        summary = pd.DataFrame()
+        overall = pd.DataFrame()
+
     # ========================================================
-    # SPIKES
+    # SPIKE RESULTS
     # ========================================================
 
     if all_spikes:
@@ -2606,21 +2478,62 @@ def main():
 
         spikes.to_csv(
             RESULTS_DIR
-            / "spikes_all_stocks.csv",
+            /
+            "spikes_all_stocks.csv",
             index=False,
         )
 
-        spike_summary = summarize_spikes(
-            spikes
+        spike_rows = []
+
+        for ticker, group in spikes.groupby(
+            "ticker"
+        ):
+
+            for model, column in [
+                (
+                    "XGBoost",
+                    "xgb_warning",
+                ),
+                (
+                    "Chronos-2",
+                    "chronos_warning",
+                ),
+            ]:
+
+                m = spike_metrics(
+                    group["actual_spike"],
+                    group[column],
+                )
+
+                spike_rows.append({
+                    "ticker":
+                        ticker,
+                    "model":
+                        model,
+                    "actual_spikes":
+                        int(
+                            group[
+                                "actual_spike"
+                            ].sum()
+                        ),
+                    **m,
+                })
+
+        spike_summary = pd.DataFrame(
+            spike_rows
         )
 
         spike_summary.to_csv(
             RESULTS_DIR
-            / "spike_summary.csv",
+            /
+            "spike_summary.csv",
             index=False,
         )
 
-        print("\nSPIKE SUMMARY")
+        print("\n")
+        print("=" * 80)
+        print("SPIKE SUMMARY")
+        print("=" * 80)
         print(
             spike_summary.to_string(
                 index=False,
@@ -2632,21 +2545,22 @@ def main():
     # COLD START
     # ========================================================
 
-    if all_cold_start:
+    if all_cold:
 
-        cold_start = pd.concat(
-            all_cold_start,
+        cold = pd.concat(
+            all_cold,
             ignore_index=True,
         )
 
-        cold_start.to_csv(
+        cold.to_csv(
             RESULTS_DIR
-            / "cold_start_results.csv",
+            /
+            "cold_start_results.csv",
             index=False,
         )
 
         cold_summary = (
-            cold_start
+            cold
             .groupby([
                 "ticker",
                 "history_length",
@@ -2672,77 +2586,18 @@ def main():
 
         cold_summary.to_csv(
             RESULTS_DIR
-            / "cold_start_summary.csv",
+            /
+            "cold_start_summary.csv",
             index=False,
         )
 
     # ========================================================
-    # MAIN COMPARISON TABLE
-    # ========================================================
-
-    if all_results:
-
-        print("\n")
-        print("=" * 80)
-        print("OVERALL MODEL COMPARISON")
-        print("=" * 80)
-
-        overall = (
-            scored
-            .groupby([
-                "experiment",
-                "horizon",
-                "model",
-            ])
-            .agg(
-                observations=(
-                    "price_mae",
-                    "size",
-                ),
-
-                mean_price_mae=(
-                    "price_mae",
-                    "mean",
-                ),
-
-                median_price_mae=(
-                    "price_mae",
-                    "median",
-                ),
-
-                mean_return_abs_error=(
-                    "return_abs_error",
-                    "mean",
-                ),
-
-                directional_accuracy=(
-                    "direction_hit",
-                    "mean",
-                ),
-            )
-            .reset_index()
-        )
-
-        print(
-            overall.to_string(
-                index=False,
-                float_format=lambda x: f"{x:.5f}",
-            )
-        )
-
-        overall.to_csv(
-            RESULTS_DIR
-            / "overall_model_comparison.csv",
-            index=False,
-        )
-
-    # ========================================================
-    # FINISH
+    # TERMINAL SUMMARY
     # ========================================================
 
     print("\n")
     print("=" * 80)
-    print("POC COMPLETE")
+    print("FINAL RESULT")
     print("=" * 80)
 
     print(
@@ -2755,8 +2610,44 @@ def main():
         ", ".join(evaluated)
     )
 
+    if not overall.empty:
+
+        for experiment in overall[
+            "experiment"
+        ].unique():
+
+            print("\n")
+            print(
+                experiment
+            )
+
+            subset = overall[
+                overall["experiment"]
+                == experiment
+            ].copy()
+
+            print(
+                subset[
+                    [
+                        "horizon",
+                        "model",
+                        "avg_price_mae",
+                        "avg_return_abs_error",
+                        "avg_directional_accuracy",
+                    ]
+                ].to_string(
+                    index=False,
+                    float_format=lambda x: f"{x:.5f}",
+                )
+            )
+
+    print("\n")
+    print("=" * 80)
+    print("DONE")
+    print("=" * 80)
+
     print(
-        f"\nResults: "
+        f"Results saved to: "
         f"{RESULTS_DIR.resolve()}"
     )
 

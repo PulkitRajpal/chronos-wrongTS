@@ -1,0 +1,276 @@
+(chronos) C:\Users\rajpa\projects\chronos-wrongTS>python train_chronos_lora.py
+======================================================================
+CHRONOS-2 FINANCIAL LoRA FINE-TUNING
+======================================================================
+Model:              amazon/chronos-2
+Context length:     256
+Prediction length:  20
+LoRA rank:          8
+LoRA alpha:         16
+Learning rate:      1e-05
+Training steps:     5
+Batch size:         1
+Gradient accum.:    8
+Output:             models\chronos2-finance-lora
+
+CUDA available: NVIDIA GeForce RTX 5060 Laptop GPU
+GPU memory: 7.96 GB
+
+Loading data\chronos_finance\train.parquet
+Loading data\chronos_finance\validation.parquet
+Train rows:       186,126
+Validation rows:  40,132
+Train series:      79
+Validation series: 79
+
+Usable training series:   79
+Usable validation series: 79
+
+======================================================================
+Loading Chronos-2
+======================================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights: 100%|███████████████████████████| 170/170 [00:00<00:00, 813.54it/s]
+
+LoRA configuration:
+LoraConfig(task_type=None, peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, peft_version='0.20.0', base_model_name_or_path=None, revision=None, inference_mode=False, r=8, target_modules={'self_attention.v', 'self_attention.k', 'self_attention.q', 'output_patch_embedding.output_layer', 'self_attention.o'}, exclude_modules=None, lora_alpha=16, lora_dropout=0.0, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=None, init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', trainable_token_indices=None, loftq_config={}, eva_config=None, corda_config=None, lora_ga_config=None, use_dora=False, velora_config=None, alora_invocation_tokens=None, use_qalora=False, qalora_group_size=16, monteclora_config=None, layer_replication=None, runtime_config=LoraRuntimeConfig(ephemeral_gpu_offload=False), lora_bias=False, target_parameters=None, use_bdlora=None, arrow_config=None, ensure_weight_tying=False)
+
+======================================================================
+Starting LoRA fine-tuning
+======================================================================
+{'loss': '5.598', 'grad_norm': '1.088', 'learning_rate': '2e-06', 'epoch': '1'}     
+{'eval_loss': '4.388', 'eval_runtime': '4.211', 'eval_samples_per_second': '18.76', 'eval_steps_per_second': '18.76', 'epoch': '1'}
+{'train_runtime': '10.75', 'train_samples_per_second': '3.721', 'train_steps_per_second': '0.465', 'train_loss': '5.598', 'epoch': '1'}
+100%|█████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+
+======================================================================
+TRAINING COMPLETE
+======================================================================
+Fine-tuned pipeline saved to:
+models\chronos2-finance-lora\finetuned-ckpt
+
+Training configuration saved to:
+models\chronos2-finance-lora\training_config.json
+
+
+
+
+-----------------------2nd time-----------------------------------------------
+(chronos) C:\Users\rajpa\projects\chronos-wrongTS>python train_chronos_lora.py
+======================================================================
+CHRONOS-2 FINANCIAL LoRA FINE-TUNING
+======================================================================
+Model:              amazon/chronos-2
+Context length:     256
+Prediction length:  20
+LoRA rank:          8
+LoRA alpha:         16
+Learning rate:      1e-05
+Training steps:     5
+Batch size:         1
+Gradient accum.:    8
+Output:             models\chronos2-finance-lora
+
+CUDA available: NVIDIA GeForce RTX 5060 Laptop GPU
+GPU memory: 7.96 GB
+
+Loading data\chronos_finance\train.parquet
+Loading data\chronos_finance\validation.parquet
+Train rows:       186,126
+Validation rows:  40,132
+Train series:      79
+Validation series: 79
+
+Usable training series:   79
+Usable validation series: 79
+
+======================================================================
+Loading Chronos-2
+======================================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights: 100%|███████████████████████████| 170/170 [00:00<00:00, 813.54it/s]
+
+LoRA configuration:
+LoraConfig(task_type=None, peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, peft_version='0.20.0', base_model_name_or_path=None, revision=None, inference_mode=False, r=8, target_modules={'self_attention.v', 'self_attention.k', 'self_attention.q', 'output_patch_embedding.output_layer', 'self_attention.o'}, exclude_modules=None, lora_alpha=16, lora_dropout=0.0, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=None, init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', trainable_token_indices=None, loftq_config={}, eva_config=None, corda_config=None, lora_ga_config=None, use_dora=False, velora_config=None, alora_invocation_tokens=None, use_qalora=False, qalora_group_size=16, monteclora_config=None, layer_replication=None, runtime_config=LoraRuntimeConfig(ephemeral_gpu_offload=False), lora_bias=False, target_parameters=None, use_bdlora=None, arrow_config=None, ensure_weight_tying=False)
+
+======================================================================
+Starting LoRA fine-tuning
+======================================================================
+{'loss': '5.598', 'grad_norm': '1.088', 'learning_rate': '2e-06', 'epoch': '1'}     
+{'eval_loss': '4.388', 'eval_runtime': '4.211', 'eval_samples_per_second': '18.76', 'eval_steps_per_second': '18.76', 'epoch': '1'}
+{'train_runtime': '10.75', 'train_samples_per_second': '3.721', 'train_steps_per_second': '0.465', 'train_loss': '5.598', 'epoch': '1'}
+100%|█████████████████████████████████████████████████| 5/5 [00:10<00:00,  2.16s/it]
+
+======================================================================
+TRAINING COMPLETE
+======================================================================
+Fine-tuned pipeline saved to:
+models\chronos2-finance-lora\finetuned-ckpt
+
+Training configuration saved to:
+models\chronos2-finance-lora\training_config.json
+
+(chronos) C:\Users\rajpa\projects\chronos-wrongTS>python train_chronos_lora.py
+======================================================================
+CHRONOS-2 FINANCIAL LoRA FINE-TUNING
+======================================================================
+Model:              amazon/chronos-2
+Context length:     256
+Prediction length:  20
+LoRA rank:          8
+LoRA alpha:         16
+Learning rate:      1e-05
+Training steps:     1000
+Batch size:         1
+Gradient accum.:    4
+Output:             models\chronos2-finance-lora
+
+CUDA available: NVIDIA GeForce RTX 5060 Laptop GPU
+GPU memory: 7.96 GB
+
+Loading data\chronos_finance\train.parquet
+Loading data\chronos_finance\validation.parquet
+Train rows:       186,126
+Validation rows:  40,132
+Train series:      79
+Validation series: 79
+
+Usable training series:   79
+Usable validation series: 79
+
+======================================================================
+Loading Chronos-2
+======================================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights: 100%|███████████████████████████| 170/170 [00:00<00:00, 886.42it/s]
+
+LoRA configuration:
+LoraConfig(task_type=None, peft_type=<PeftType.LORA: 'LORA'>, auto_mapping=None, peft_version='0.20.0', base_model_name_or_path=None, revision=None, inference_mode=False, r=8, target_modules={'output_patch_embedding.output_layer', 'self_attention.k', 'self_attention.v', 'self_attention.q', 'self_attention.o'}, exclude_modules=None, lora_alpha=16, lora_dropout=0.0, fan_in_fan_out=False, bias='none', use_rslora=False, modules_to_save=None, init_lora_weights=True, layers_to_transform=None, layers_pattern=None, rank_pattern={}, alpha_pattern={}, megatron_config=None, megatron_core='megatron.core', trainable_token_indices=None, loftq_config={}, eva_config=None, corda_config=None, lora_ga_config=None, use_dora=False, velora_config=None, alora_invocation_tokens=None, use_qalora=False, qalora_group_size=16, monteclora_config=None, layer_replication=None, runtime_config=LoraRuntimeConfig(ephemeral_gpu_offload=False), lora_bias=False, target_parameters=None, use_bdlora=None, arrow_config=None, ensure_weight_tying=False)
+
+======================================================================
+Starting LoRA fine-tuning
+======================================================================
+{'loss': '5.598', 'grad_norm': '1.275', 'learning_rate': '9.91e-06', 'epoch': '0.01'}
+{'loss': '4.996', 'grad_norm': '1.066', 'learning_rate': '9.81e-06', 'epoch': '0.02'}
+{'loss': '5.552', 'grad_norm': '0.4069', 'learning_rate': '9.71e-06', 'epoch': '0.03'}
+{'loss': '5.262', 'grad_norm': '1.063', 'learning_rate': '9.61e-06', 'epoch': '0.04'}
+{'loss': '5.421', 'grad_norm': '0.394', 'learning_rate': '9.51e-06', 'epoch': '0.05'}
+{'loss': '5.69', 'grad_norm': '1.458', 'learning_rate': '9.41e-06', 'epoch': '0.06'}
+{'loss': '5.592', 'grad_norm': '1.044', 'learning_rate': '9.31e-06', 'epoch': '0.07'}
+{'loss': '4.918', 'grad_norm': '0.965', 'learning_rate': '9.21e-06', 'epoch': '0.08'}
+{'loss': '5.442', 'grad_norm': '0.7262', 'learning_rate': '9.11e-06', 'epoch': '0.09'}
+{'loss': '5.736', 'grad_norm': '0.7932', 'learning_rate': '9.01e-06', 'epoch': '0.1'}
+{'eval_loss': '4.387', 'eval_runtime': '3.744', 'eval_samples_per_second': '21.1', 'eval_steps_per_second': '21.1', 'epoch': '0.1'}
+{'loss': '5.067', 'grad_norm': '0.9217', 'learning_rate': '8.91e-06', 'epoch': '0.11'}
+{'loss': '5.713', 'grad_norm': '0.7243', 'learning_rate': '8.81e-06', 'epoch': '0.12'}
+{'loss': '5.393', 'grad_norm': '1.342', 'learning_rate': '8.71e-06', 'epoch': '0.13'}
+{'loss': '5.783', 'grad_norm': '0.9913', 'learning_rate': '8.61e-06', 'epoch': '0.14'}
+{'loss': '5.522', 'grad_norm': '0.7706', 'learning_rate': '8.51e-06', 'epoch': '0.15'}
+{'loss': '5.621', 'grad_norm': '0.666', 'learning_rate': '8.41e-06', 'epoch': '0.16'}
+{'loss': '5.466', 'grad_norm': '0.7193', 'learning_rate': '8.31e-06', 'epoch': '0.17'}
+{'loss': '5.478', 'grad_norm': '0.5865', 'learning_rate': '8.21e-06', 'epoch': '0.18'}
+{'loss': '5.41', 'grad_norm': '1.032', 'learning_rate': '8.11e-06', 'epoch': '0.19'}
+{'loss': '5.421', 'grad_norm': '0.9032', 'learning_rate': '8.01e-06', 'epoch': '0.2'}
+{'eval_loss': '4.386', 'eval_runtime': '3.945', 'eval_samples_per_second': '20.03', 'eval_steps_per_second': '20.03', 'epoch': '0.2'}
+{'loss': '5.997', 'grad_norm': '0.6124', 'learning_rate': '7.91e-06', 'epoch': '0.21'}
+{'loss': '4.968', 'grad_norm': '0.7343', 'learning_rate': '7.81e-06', 'epoch': '0.22'}
+{'loss': '4.809', 'grad_norm': '1.026', 'learning_rate': '7.71e-06', 'epoch': '0.23'}
+{'loss': '5.848', 'grad_norm': '0.7535', 'learning_rate': '7.61e-06', 'epoch': '0.24'}
+{'loss': '5.148', 'grad_norm': '0.9566', 'learning_rate': '7.51e-06', 'epoch': '0.25'}
+{'loss': '5.452', 'grad_norm': '0.426', 'learning_rate': '7.41e-06', 'epoch': '0.26'}
+{'loss': '5.577', 'grad_norm': '0.6471', 'learning_rate': '7.31e-06', 'epoch': '0.27'}
+{'loss': '5.511', 'grad_norm': '1.397', 'learning_rate': '7.21e-06', 'epoch': '0.28'}
+{'loss': '5.191', 'grad_norm': '0.8591', 'learning_rate': '7.11e-06', 'epoch': '0.29'}
+{'loss': '5.484', 'grad_norm': '0.7186', 'learning_rate': '7.01e-06', 'epoch': '0.3'}
+{'eval_loss': '4.386', 'eval_runtime': '3.767', 'eval_samples_per_second': '20.97', 'eval_steps_per_second': '20.97', 'epoch': '0.3'}
+{'loss': '5.212', 'grad_norm': '1.067', 'learning_rate': '6.91e-06', 'epoch': '0.31'}
+{'loss': '5.212', 'grad_norm': '0.7385', 'learning_rate': '6.81e-06', 'epoch': '0.32'}
+{'loss': '5.761', 'grad_norm': '1.64', 'learning_rate': '6.71e-06', 'epoch': '0.33'}
+{'loss': '5.397', 'grad_norm': '2.048', 'learning_rate': '6.61e-06', 'epoch': '0.34'}
+{'loss': '4.975', 'grad_norm': '0.8608', 'learning_rate': '6.51e-06', 'epoch': '0.35'}
+{'loss': '5.111', 'grad_norm': '0.8058', 'learning_rate': '6.41e-06', 'epoch': '0.36'}
+{'loss': '4.994', 'grad_norm': '1.282', 'learning_rate': '6.31e-06', 'epoch': '0.37'}
+{'loss': '4.869', 'grad_norm': '0.8216', 'learning_rate': '6.21e-06', 'epoch': '0.38'}
+{'loss': '5.509', 'grad_norm': '0.5162', 'learning_rate': '6.11e-06', 'epoch': '0.39'}
+{'loss': '5.157', 'grad_norm': '0.7131', 'learning_rate': '6.01e-06', 'epoch': '0.4'}
+{'eval_loss': '4.382', 'eval_runtime': '3.861', 'eval_samples_per_second': '20.46', 'eval_steps_per_second': '20.46', 'epoch': '0.4'}
+{'loss': '5.018', 'grad_norm': '0.84', 'learning_rate': '5.91e-06', 'epoch': '0.41'}
+{'loss': '5.359', 'grad_norm': '0.9216', 'learning_rate': '5.81e-06', 'epoch': '0.42'}
+{'loss': '6.021', 'grad_norm': '0.6778', 'learning_rate': '5.71e-06', 'epoch': '0.43'}
+{'loss': '5.493', 'grad_norm': '0.7909', 'learning_rate': '5.61e-06', 'epoch': '0.44'}
+{'loss': '5.338', 'grad_norm': '0.9007', 'learning_rate': '5.51e-06', 'epoch': '0.45'}
+{'loss': '5.273', 'grad_norm': '0.7889', 'learning_rate': '5.41e-06', 'epoch': '0.46'}
+{'loss': '5.586', 'grad_norm': '1.184', 'learning_rate': '5.31e-06', 'epoch': '0.47'}
+{'loss': '5.699', 'grad_norm': '1.053', 'learning_rate': '5.21e-06', 'epoch': '0.48'}
+{'loss': '5.096', 'grad_norm': '0.7864', 'learning_rate': '5.11e-06', 'epoch': '0.49'}
+{'loss': '5.353', 'grad_norm': '0.8556', 'learning_rate': '5.01e-06', 'epoch': '0.5'}
+{'eval_loss': '4.382', 'eval_runtime': '3.794', 'eval_samples_per_second': '20.82', 'eval_steps_per_second': '20.82', 'epoch': '0.5'}
+{'loss': '5.401', 'grad_norm': '0.7755', 'learning_rate': '4.91e-06', 'epoch': '0.51'}
+{'loss': '5.218', 'grad_norm': '0.549', 'learning_rate': '4.81e-06', 'epoch': '0.52'}
+{'loss': '5.348', 'grad_norm': '0.9197', 'learning_rate': '4.71e-06', 'epoch': '0.53'}
+{'loss': '5.514', 'grad_norm': '0.9006', 'learning_rate': '4.61e-06', 'epoch': '0.54'}
+{'loss': '5.376', 'grad_norm': '0.9973', 'learning_rate': '4.51e-06', 'epoch': '0.55'}
+{'loss': '5.045', 'grad_norm': '0.7902', 'learning_rate': '4.41e-06', 'epoch': '0.56'}
+{'loss': '4.874', 'grad_norm': '0.7117', 'learning_rate': '4.31e-06', 'epoch': '0.57'}
+{'loss': '5.563', 'grad_norm': '0.6433', 'learning_rate': '4.21e-06', 'epoch': '0.58'}
+{'loss': '4.892', 'grad_norm': '0.979', 'learning_rate': '4.11e-06', 'epoch': '0.59'}
+{'loss': '5.8', 'grad_norm': '0.8444', 'learning_rate': '4.01e-06', 'epoch': '0.6'} 
+{'eval_loss': '4.38', 'eval_runtime': '3.798', 'eval_samples_per_second': '20.8', 'eval_steps_per_second': '20.8', 'epoch': '0.6'}
+{'loss': '5.795', 'grad_norm': '1.162', 'learning_rate': '3.91e-06', 'epoch': '0.61'}
+{'loss': '5.237', 'grad_norm': '0.7493', 'learning_rate': '3.81e-06', 'epoch': '0.62'}
+{'loss': '5.316', 'grad_norm': '1.135', 'learning_rate': '3.71e-06', 'epoch': '0.63'}
+{'loss': '5.708', 'grad_norm': '0.7289', 'learning_rate': '3.61e-06', 'epoch': '0.64'}
+{'loss': '5.265', 'grad_norm': '1.029', 'learning_rate': '3.51e-06', 'epoch': '0.65'}
+{'loss': '5.342', 'grad_norm': '0.8688', 'learning_rate': '3.41e-06', 'epoch': '0.66'}
+{'loss': '4.922', 'grad_norm': '0.6997', 'learning_rate': '3.31e-06', 'epoch': '0.67'}
+{'loss': '5.276', 'grad_norm': '0.6506', 'learning_rate': '3.21e-06', 'epoch': '0.68'}
+{'loss': '5.236', 'grad_norm': '0.9329', 'learning_rate': '3.11e-06', 'epoch': '0.69'}
+{'loss': '5.021', 'grad_norm': '0.741', 'learning_rate': '3.01e-06', 'epoch': '0.7'}
+{'eval_loss': '4.379', 'eval_runtime': '3.802', 'eval_samples_per_second': '20.78', 'eval_steps_per_second': '20.78', 'epoch': '0.7'}
+{'loss': '5.315', 'grad_norm': '1.018', 'learning_rate': '2.91e-06', 'epoch': '0.71'}
+{'loss': '4.873', 'grad_norm': '0.7043', 'learning_rate': '2.81e-06', 'epoch': '0.72'}
+{'loss': '5.059', 'grad_norm': '0.475', 'learning_rate': '2.71e-06', 'epoch': '0.73'}
+{'loss': '5.516', 'grad_norm': '1.347', 'learning_rate': '2.61e-06', 'epoch': '0.74'}
+{'loss': '5.302', 'grad_norm': '1.278', 'learning_rate': '2.51e-06', 'epoch': '0.75'}
+{'loss': '5.123', 'grad_norm': '0.7805', 'learning_rate': '2.41e-06', 'epoch': '0.76'}
+{'loss': '4.876', 'grad_norm': '1.217', 'learning_rate': '2.31e-06', 'epoch': '0.77'}
+{'loss': '4.809', 'grad_norm': '1.263', 'learning_rate': '2.21e-06', 'epoch': '0.78'}
+{'loss': '6.191', 'grad_norm': '1.532', 'learning_rate': '2.11e-06', 'epoch': '0.79'}
+{'loss': '5.46', 'grad_norm': '0.9549', 'learning_rate': '2.01e-06', 'epoch': '0.8'}
+{'eval_loss': '4.378', 'eval_runtime': '3.824', 'eval_samples_per_second': '20.66', 'eval_steps_per_second': '20.66', 'epoch': '0.8'}
+{'loss': '5.404', 'grad_norm': '1.201', 'learning_rate': '1.91e-06', 'epoch': '0.81'}
+{'loss': '5.699', 'grad_norm': '1.07', 'learning_rate': '1.81e-06', 'epoch': '0.82'}
+{'loss': '5', 'grad_norm': '1.107', 'learning_rate': '1.71e-06', 'epoch': '0.83'}   
+{'loss': '5.516', 'grad_norm': '1.04', 'learning_rate': '1.61e-06', 'epoch': '0.84'}
+{'loss': '5.216', 'grad_norm': '0.6798', 'learning_rate': '1.51e-06', 'epoch': '0.85'}
+{'loss': '5.392', 'grad_norm': '0.9201', 'learning_rate': '1.41e-06', 'epoch': '0.86'}
+{'loss': '4.981', 'grad_norm': '0.6583', 'learning_rate': '1.31e-06', 'epoch': '0.87'}
+{'loss': '5.126', 'grad_norm': '0.6882', 'learning_rate': '1.21e-06', 'epoch': '0.88'}
+{'loss': '5.434', 'grad_norm': '1.443', 'learning_rate': '1.11e-06', 'epoch': '0.89'}
+{'loss': '5.101', 'grad_norm': '1.405', 'learning_rate': '1.01e-06', 'epoch': '0.9'}
+{'eval_loss': '4.378', 'eval_runtime': '3.757', 'eval_samples_per_second': '21.03', 'eval_steps_per_second': '21.03', 'epoch': '0.9'}
+{'loss': '5.56', 'grad_norm': '1.425', 'learning_rate': '9.1e-07', 'epoch': '0.91'} 
+{'loss': '5.191', 'grad_norm': '0.5657', 'learning_rate': '8.1e-07', 'epoch': '0.92'}
+{'loss': '5.189', 'grad_norm': '0.8516', 'learning_rate': '7.1e-07', 'epoch': '0.93'}
+{'loss': '5.547', 'grad_norm': '0.8746', 'learning_rate': '6.1e-07', 'epoch': '0.94'}
+{'loss': '5.167', 'grad_norm': '1.883', 'learning_rate': '5.1e-07', 'epoch': '0.95'}
+{'loss': '5.38', 'grad_norm': '1.119', 'learning_rate': '4.1e-07', 'epoch': '0.96'} 
+{'loss': '5.34', 'grad_norm': '1.094', 'learning_rate': '3.1e-07', 'epoch': '0.97'} 
+{'loss': '5.445', 'grad_norm': '0.9156', 'learning_rate': '2.1e-07', 'epoch': '0.98'}
+{'loss': '5.06', 'grad_norm': '0.9391', 'learning_rate': '1.1e-07', 'epoch': '0.99'}
+{'loss': '5.171', 'grad_norm': '0.7773', 'learning_rate': '1e-08', 'epoch': '1'}    
+{'eval_loss': '4.377', 'eval_runtime': '3.789', 'eval_samples_per_second': '20.85', 'eval_steps_per_second': '20.85', 'epoch': '1'}
+{'train_runtime': '497.9', 'train_samples_per_second': '8.033', 'train_steps_per_second': '2.008', 'train_loss': '5.341', 'epoch': '1'}
+100%|███████████████████████████████████████████| 1000/1000 [08:17<00:00,  2.01it/s]
+
+======================================================================
+TRAINING COMPLETE
+======================================================================
+Fine-tuned pipeline saved to:
+models\chronos2-finance-lora\finetuned-ckpt
+
+Training configuration saved to:
+models\chronos2-finance-lora\training_config.json

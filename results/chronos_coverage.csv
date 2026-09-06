@@ -1,0 +1,81 @@
+experiment,ticker,horizon,observations,p10_breach_rate,p90_breach_rate
+Experiment 1 — Univariate Close,AAPL,1,50,0.06,0.14
+Experiment 1 — Univariate Close,AAPL,5,50,0.08,0.24
+Experiment 1 — Univariate Close,AAPL,10,50,0.02,0.22
+Experiment 1 — Univariate Close,AAPL,20,50,0.06,0.24
+Experiment 1 — Univariate Close,AMZN,1,50,0.02,0.12
+Experiment 1 — Univariate Close,AMZN,5,50,0.06,0.16
+Experiment 1 — Univariate Close,AMZN,10,50,0.06,0.16
+Experiment 1 — Univariate Close,AMZN,20,50,0.12,0.14
+Experiment 1 — Univariate Close,CVNA,1,50,0.14,0.12
+Experiment 1 — Univariate Close,CVNA,5,50,0.16,0.12
+Experiment 1 — Univariate Close,CVNA,10,50,0.18,0.14
+Experiment 1 — Univariate Close,CVNA,20,50,0.16,0.12
+Experiment 1 — Univariate Close,ENPH,1,50,0.04,0.2
+Experiment 1 — Univariate Close,ENPH,5,50,0.04,0.16
+Experiment 1 — Univariate Close,ENPH,10,50,0.08,0.26
+Experiment 1 — Univariate Close,ENPH,20,50,0.12,0.18
+Experiment 1 — Univariate Close,IONQ,1,50,0.12,0.16
+Experiment 1 — Univariate Close,IONQ,5,50,0.06,0.1
+Experiment 1 — Univariate Close,IONQ,10,50,0.1,0.18
+Experiment 1 — Univariate Close,IONQ,20,50,0.06,0.16
+Experiment 1 — Univariate Close,MSFT,1,50,0.06,0.14
+Experiment 1 — Univariate Close,MSFT,5,50,0.04,0.14
+Experiment 1 — Univariate Close,MSFT,10,50,0.06,0.1
+Experiment 1 — Univariate Close,MSFT,20,50,0.04,0.1
+Experiment 1 — Univariate Close,NVDA,1,50,0.06,0.22
+Experiment 1 — Univariate Close,NVDA,5,50,0.04,0.26
+Experiment 1 — Univariate Close,NVDA,10,50,0.04,0.2
+Experiment 1 — Univariate Close,NVDA,20,50,0.02,0.16
+Experiment 1 — Univariate Close,PLUG,1,50,0.1,0.12
+Experiment 1 — Univariate Close,PLUG,5,50,0.12,0.16
+Experiment 1 — Univariate Close,PLUG,10,50,0.08,0.14
+Experiment 1 — Univariate Close,PLUG,20,50,0.14,0.18
+Experiment 1 — Univariate Close,RKLB,1,50,0.04,0.14
+Experiment 1 — Univariate Close,RKLB,5,50,0.1,0.08
+Experiment 1 — Univariate Close,RKLB,10,50,0.08,0.08
+Experiment 1 — Univariate Close,RKLB,20,50,0.12,0.22
+Experiment 1 — Univariate Close,SMCI,1,50,0.08,0.2
+Experiment 1 — Univariate Close,SMCI,5,50,0.1,0.18
+Experiment 1 — Univariate Close,SMCI,10,50,0.16,0.18
+Experiment 1 — Univariate Close,SMCI,20,50,0.08,0.2
+Experiment 2 — OHLCV,AAPL,1,50,0.02,0.22
+Experiment 2 — OHLCV,AAPL,5,50,0.06,0.24
+Experiment 2 — OHLCV,AAPL,10,50,0.04,0.24
+Experiment 2 — OHLCV,AAPL,20,50,0.02,0.3
+Experiment 2 — OHLCV,AMZN,1,50,0.02,0.16
+Experiment 2 — OHLCV,AMZN,5,50,0.08,0.18
+Experiment 2 — OHLCV,AMZN,10,50,0.06,0.18
+Experiment 2 — OHLCV,AMZN,20,50,0.12,0.16
+Experiment 2 — OHLCV,CVNA,1,50,0.12,0.16
+Experiment 2 — OHLCV,CVNA,5,50,0.14,0.14
+Experiment 2 — OHLCV,CVNA,10,50,0.18,0.16
+Experiment 2 — OHLCV,CVNA,20,50,0.18,0.12
+Experiment 2 — OHLCV,ENPH,1,50,0.04,0.18
+Experiment 2 — OHLCV,ENPH,5,50,0.04,0.12
+Experiment 2 — OHLCV,ENPH,10,50,0.08,0.22
+Experiment 2 — OHLCV,ENPH,20,50,0.12,0.18
+Experiment 2 — OHLCV,IONQ,1,50,0.14,0.16
+Experiment 2 — OHLCV,IONQ,5,50,0.06,0.1
+Experiment 2 — OHLCV,IONQ,10,50,0.12,0.16
+Experiment 2 — OHLCV,IONQ,20,50,0.08,0.18
+Experiment 2 — OHLCV,MSFT,1,50,0.04,0.2
+Experiment 2 — OHLCV,MSFT,5,50,0.0,0.18
+Experiment 2 — OHLCV,MSFT,10,50,0.04,0.18
+Experiment 2 — OHLCV,MSFT,20,50,0.04,0.12
+Experiment 2 — OHLCV,NVDA,1,50,0.06,0.24
+Experiment 2 — OHLCV,NVDA,5,50,0.02,0.28
+Experiment 2 — OHLCV,NVDA,10,50,0.04,0.22
+Experiment 2 — OHLCV,NVDA,20,50,0.06,0.18
+Experiment 2 — OHLCV,PLUG,1,50,0.1,0.12
+Experiment 2 — OHLCV,PLUG,5,50,0.12,0.18
+Experiment 2 — OHLCV,PLUG,10,50,0.1,0.14
+Experiment 2 — OHLCV,PLUG,20,50,0.16,0.12
+Experiment 2 — OHLCV,RKLB,1,50,0.04,0.12
+Experiment 2 — OHLCV,RKLB,5,50,0.08,0.08
+Experiment 2 — OHLCV,RKLB,10,50,0.08,0.08
+Experiment 2 — OHLCV,RKLB,20,50,0.12,0.22
+Experiment 2 — OHLCV,SMCI,1,50,0.08,0.2
+Experiment 2 — OHLCV,SMCI,5,50,0.1,0.18
+Experiment 2 — OHLCV,SMCI,10,50,0.14,0.16
+Experiment 2 — OHLCV,SMCI,20,50,0.1,0.2

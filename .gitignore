@@ -1,2 +1,20 @@
-/chronos
-/__pycache__
+# Local virtual environment
+chronos/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db

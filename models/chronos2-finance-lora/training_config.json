@@ -1,0 +1,24 @@
+{
+  "model_id": "amazon/chronos-2",
+  "prediction_length": 20,
+  "context_length": 256,
+  "finetune_mode": "lora",
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "self_attention.q",
+      "self_attention.v",
+      "self_attention.k",
+      "self_attention.o",
+      "output_patch_embedding.output_layer"
+    ]
+  },
+  "learning_rate": 1e-05,
+  "num_steps": 1000,
+  "batch_size": 1,
+  "gradient_accumulation_steps": 4,
+  "train_series": 79,
+  "validation_series": 79
+}

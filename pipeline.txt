@@ -1,0 +1,68 @@
+4. One important change from my previous suggestion
+
+I would not manually create every sliding window in this preprocessing script.
+
+Chronos-2's current pipeline.fit() takes the time-series inputs and internally constructs its training dataset using Chronos2Dataset, including context_length, prediction_length, and min_past.
+
+So your data-preparation layer should remain:
+
+Yahoo Finance
+     ↓
+clean daily prices
+     ↓
+log returns
+     ↓
+long-format series
+     ↓
+train.parquet
+validation.parquet
+
+Then:
+
+train.parquet
+     ↓
+Chronos2Pipeline.fit()
+     ↓
+sliding training contexts
+
+That keeps the pipeline much cleaner.
+
+5. One more thing I'd change for your POC
+
+I intentionally excluded these:
+
+AAPL
+MSFT
+NVDA
+AMZN
+ENPH
+SMCI
+CVNA
+PLUG
+RKLB
+IONQ
+
+from the training universe.
+
+That's important because these are the stocks you've already used to establish your benchmark. Your benchmark currently covers exactly those 10 stocks.
+
+Then your final experiment becomes:
+
+100-ish public financial series
+          ↓
+     LoRA training
+          ↓
+  Financial Chronos-2
+          ↓
+ ┌────────────────────────┐
+ │ AAPL / MSFT / NVDA ... │
+ │ completely held out    │
+ └────────────────────────┘
+          ↓
+same benchmark as before
+
+That's a much stronger experiment than fine-tuning directly on those 10 names.
+
+Also, because your current benchmark covers several horizons out to 20 days, I'd train this first version with prediction_length=20 so that the fine-tuned objective matches the longest forecast you care about. The current Chronos-2 API explicitly takes prediction_length during fine-tuning.
+
+The next piece should be the actual Chronos2Pipeline.fit(..., finetune_mode="lora") script that reads these two parquet files, including the correct LoRA configuration and memory settings for your GPU.
