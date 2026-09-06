@@ -16,16 +16,11 @@ from peft import LoraConfig
 # ============================================================
 
 MODEL_ID = "amazon/chronos-2"
-TRAIN_FILE = Path(
-    "data/chronos_finance_broad/train.parquet"
-)
 
-VALIDATION_FILE = Path(
-    "data/chronos_finance_broad/validation.parquet"
-)
-OUTPUT_DIR = Path(
-    "models/chronos2-finance-lora-v3-broad"
-)
+TRAIN_FILE = Path("data/chronos_finance/train.parquet")
+VALIDATION_FILE = Path("data/chronos_finance/validation.parquet")
+
+OUTPUT_DIR = Path("models/chronos2-finance-lora-v2")
 
 # Forecast setup
 CONTEXT_LENGTH = 256
