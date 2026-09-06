@@ -1,0 +1,506 @@
+{
+  "version": "V5",
+  "model_id": "amazon/chronos-2",
+  "dataset": "multivariate_equity_market_context",
+  "context_length": 512,
+  "prediction_length": 20,
+  "target": "target",
+  "past_only_covariates": [
+    "SPY_RET",
+    "QQQ_RET",
+    "VIX_RET",
+    "US5Y_CHG",
+    "US10Y_CHG",
+    "realized_vol_20",
+    "volume_z"
+  ],
+  "future_covariates": [],
+  "lora": {
+    "r": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": [
+      "self_attention.q",
+      "self_attention.v",
+      "self_attention.k",
+      "self_attention.o",
+      "output_patch_embedding.output_layer"
+    ]
+  },
+  "learning_rate": 2e-05,
+  "lr_scheduler_type": "constant_with_warmup",
+  "warmup_steps": 100,
+  "num_steps": 2000,
+  "batch_size": 1,
+  "gradient_accumulation_steps": 4,
+  "training_series": 91,
+  "excluded_evaluation_tickers": [
+    "AAPL",
+    "AMZN",
+    "CVNA",
+    "ENPH",
+    "IONQ",
+    "MSFT",
+    "NVDA",
+    "PLUG",
+    "RKLB",
+    "SMCI"
+  ],
+  "series_metadata": [
+    {
+      "ticker": "ABBV",
+      "train_rows": 2995,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ABT",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ADBE",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AFRM",
+      "train_rows": 975,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMC",
+      "train_rows": 2752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMD",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ASML",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AVGO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AXP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AZN",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BA",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BABA",
+      "train_rows": 2563,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BAC",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BHP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BMY",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "C",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CAT",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COF",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COIN",
+      "train_rows": 913,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COST",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CRM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CRWD",
+      "train_rows": 1376,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CSCO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CVX",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DDOG",
+      "train_rows": 1307,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DEO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DHR",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DIS",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DKNG",
+      "train_rows": 1346,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GE",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GME",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GOOG",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GS",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HMC",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HON",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HOOD",
+      "train_rows": 839,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IBM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "INTC",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JD",
+      "train_rows": 2646,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JNJ",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JPM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LCID",
+      "train_rows": 1055,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LLY",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MA",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MARA",
+      "train_rows": 3129,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MCD",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "META",
+      "train_rows": 3150,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MRK",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MS",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MSTR",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NET",
+      "train_rows": 1311,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NFLX",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NIO",
+      "train_rows": 1563,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NKE",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NVS",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ORCL",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PATH",
+      "train_rows": 908,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PDD",
+      "train_rows": 1596,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PEP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PFE",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PLTR",
+      "train_rows": 1047,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "QCOM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIOT",
+      "train_rows": 2179,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIVN",
+      "train_rows": 766,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ROKU",
+      "train_rows": 1803,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SAP",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SBUX",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SHEL",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SHOP",
+      "train_rows": 2396,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SLB",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SNOW",
+      "train_rows": 1057,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SOFI",
+      "train_rows": 982,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SONY",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TCEHY",
+      "train_rows": 3746,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TMO",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TSLA",
+      "train_rows": 3625,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TXN",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "U",
+      "train_rows": 1055,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UL",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UNH",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UPST",
+      "train_rows": 993,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "V",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VALE",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WFC",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WMT",
+      "train_rows": 3747,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "XOM",
+      "train_rows": 3747,
+      "validation_rows": 764
+    }
+  ]
+}

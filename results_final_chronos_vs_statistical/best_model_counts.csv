@@ -1,0 +1,14 @@
+winner,wins
+Naive,15
+Chronos-LoRA-V3,5
+XGBoost,4
+Chronos-LoRA-V2,3
+Chronos-LoRA-V1,3
+Chronos-LoRA-V5,3
+GARCH,3
+LightGBM,2
+ARIMA,2
+Chronos-LoRA-V4,2
+Chronos-2,1
+ETS,1
+GJR-GARCH,1

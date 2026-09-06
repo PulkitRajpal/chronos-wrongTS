@@ -1,0 +1,12 @@
+model,comparisons,wins_vs_garch,losses_vs_garch,ties_vs_garch,win_rate_excluding_ties
+ARIMA,40,13,27,0,0.325
+Chronos-LoRA-V1,40,9,31,0,0.225
+Chronos-LoRA-V2,40,11,29,0,0.275
+Chronos-LoRA-V3,40,10,30,0,0.25
+Chronos-LoRA-V4,40,9,31,0,0.225
+EGARCH,10,2,8,0,0.2
+ETS,40,9,31,0,0.225
+GJR-GARCH,40,12,28,0,0.3
+LightGBM,40,3,37,0,0.075
+Naive,40,15,25,0,0.375
+XGBoost,40,2,38,0,0.05

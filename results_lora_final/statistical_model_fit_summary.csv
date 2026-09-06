@@ -1,0 +1,6 @@
+model,cutoffs,successful_fits,success_rate
+ARIMA,2000,2000,1.0
+EGARCH,2000,2000,1.0
+ETS,2000,2000,1.0
+GARCH,2000,2000,1.0
+GJR-GARCH,2000,2000,1.0
