@@ -1,0 +1,2335 @@
+{
+  "version": "V6",
+  "context_length": 512,
+  "prediction_length": 20,
+  "usable_series": 385,
+  "training_inputs": 385,
+  "validation_inputs": 385,
+  "used_tickers": [
+    "ABBV",
+    "ABNB",
+    "ABT",
+    "ACHR",
+    "ADBE",
+    "ADI",
+    "ADSK",
+    "AEP",
+    "AES",
+    "AFRM",
+    "AIG",
+    "AJG",
+    "AKAM",
+    "ALB",
+    "ALGN",
+    "ALL",
+    "AMAT",
+    "AMC",
+    "AMCR",
+    "AMD",
+    "AME",
+    "AMGN",
+    "AMP",
+    "AMT",
+    "AON",
+    "APA",
+    "APD",
+    "APH",
+    "APP",
+    "ARE",
+    "ASML",
+    "ASTS",
+    "AVGO",
+    "AVY",
+    "AWK",
+    "AXP",
+    "AZN",
+    "AZO",
+    "BA",
+    "BABA",
+    "BAC",
+    "BALL",
+    "BBY",
+    "BHP",
+    "BIDU",
+    "BIIB",
+    "BKNG",
+    "BKR",
+    "BLK",
+    "BMY",
+    "BP",
+    "BSX",
+    "C",
+    "CAG",
+    "CAH",
+    "CARR",
+    "CAT",
+    "CB",
+    "CCI",
+    "CCL",
+    "CDNS",
+    "CE",
+    "CELH",
+    "CF",
+    "CFG",
+    "CHD",
+    "CHKP",
+    "CHRD",
+    "CHTR",
+    "CHWY",
+    "CI",
+    "CL",
+    "CLF",
+    "CLX",
+    "CMCSA",
+    "CME",
+    "CMG",
+    "CMI",
+    "CMS",
+    "CNP",
+    "COF",
+    "COIN",
+    "COP",
+    "COR",
+    "COST",
+    "CRM",
+    "CRWD",
+    "CSCO",
+    "CSX",
+    "CVS",
+    "CVX",
+    "D",
+    "DAL",
+    "DASH",
+    "DD",
+    "DDOG",
+    "DE",
+    "DECK",
+    "DELL",
+    "DEO",
+    "DHI",
+    "DHR",
+    "DIS",
+    "DKNG",
+    "DLR",
+    "DOW",
+    "DRI",
+    "DTE",
+    "DUK",
+    "DVN",
+    "DXCM",
+    "EBAY",
+    "ECL",
+    "ED",
+    "EL",
+    "ELV",
+    "EMN",
+    "EMR",
+    "EOG",
+    "EQIX",
+    "EQT",
+    "ES",
+    "ESS",
+    "ETN",
+    "ETR",
+    "ETSY",
+    "EVRG",
+    "EW",
+    "EXC",
+    "EXPE",
+    "EXR",
+    "F",
+    "FANG",
+    "FAST",
+    "FCX",
+    "FDX",
+    "FE",
+    "FITB",
+    "FMC",
+    "FOX",
+    "FOXA",
+    "FTNT",
+    "GD",
+    "GE",
+    "GEN",
+    "GILD",
+    "GIS",
+    "GM",
+    "GME",
+    "GOOG",
+    "GS",
+    "GSK",
+    "GWW",
+    "HAL",
+    "HBAN",
+    "HCA",
+    "HD",
+    "HIMS",
+    "HLT",
+    "HMC",
+    "HON",
+    "HOOD",
+    "HPE",
+    "HPQ",
+    "HST",
+    "HSY",
+    "HUBS",
+    "HUM",
+    "IBM",
+    "ICE",
+    "IDXX",
+    "IFF",
+    "INTC",
+    "INTU",
+    "INVH",
+    "IP",
+    "IQV",
+    "IR",
+    "IRM",
+    "ISRG",
+    "ITW",
+    "JCI",
+    "JD",
+    "JNJ",
+    "JOBY",
+    "JPM",
+    "KEY",
+    "KHC",
+    "KLAC",
+    "KMB",
+    "KMI",
+    "KO",
+    "KR",
+    "LCID",
+    "LEN",
+    "LI",
+    "LIN",
+    "LLY",
+    "LMT",
+    "LNT",
+    "LOW",
+    "LRCX",
+    "LULU",
+    "LUV",
+    "LVS",
+    "LYV",
+    "MA",
+    "MAA",
+    "MAR",
+    "MARA",
+    "MCD",
+    "MCHP",
+    "MCK",
+    "MCO",
+    "MDLZ",
+    "MDT",
+    "MET",
+    "META",
+    "MGM",
+    "MLM",
+    "MMM",
+    "MNST",
+    "MO",
+    "MOS",
+    "MPC",
+    "MRK",
+    "MRVL",
+    "MS",
+    "MSTR",
+    "MTB",
+    "MU",
+    "NCLH",
+    "NEE",
+    "NEM",
+    "NET",
+    "NI",
+    "NIO",
+    "NKE",
+    "NOC",
+    "NOW",
+    "NSC",
+    "NTAP",
+    "NTES",
+    "NTRS",
+    "NUE",
+    "NVO",
+    "NVS",
+    "NWS",
+    "NWSA",
+    "NXPI",
+    "O",
+    "OKE",
+    "OKLO",
+    "OKTA",
+    "OMC",
+    "ON",
+    "ORCL",
+    "ORLY",
+    "OTIS",
+    "OXY",
+    "PANW",
+    "PARA",
+    "PATH",
+    "PCAR",
+    "PDD",
+    "PEG",
+    "PEP",
+    "PFE",
+    "PG",
+    "PGR",
+    "PH",
+    "PHM",
+    "PINS",
+    "PKG",
+    "PLD",
+    "PLTR",
+    "PM",
+    "PNC",
+    "PPG",
+    "PPL",
+    "PRU",
+    "PSA",
+    "PSX",
+    "PWR",
+    "PYPL",
+    "QCOM",
+    "RBLX",
+    "RCL",
+    "REGN",
+    "RELX",
+    "RF",
+    "RIO",
+    "RIOT",
+    "RIVN",
+    "RL",
+    "RMD",
+    "ROK",
+    "ROKU",
+    "ROST",
+    "RSG",
+    "RTX",
+    "SAP",
+    "SBAC",
+    "SBUX",
+    "SCHW",
+    "SHEL",
+    "SHOP",
+    "SHW",
+    "SLB",
+    "SNOW",
+    "SNPS",
+    "SO",
+    "SOFI",
+    "SONY",
+    "SOUN",
+    "SPG",
+    "SPGI",
+    "SPOT",
+    "SRE",
+    "STLD",
+    "STT",
+    "STX",
+    "SWK",
+    "SYK",
+    "SYY",
+    "T",
+    "TEAM",
+    "TER",
+    "TFC",
+    "TGT",
+    "TJX",
+    "TM",
+    "TMO",
+    "TMUS",
+    "TPR",
+    "TRGP",
+    "TROW",
+    "TRV",
+    "TSN",
+    "TT",
+    "TTD",
+    "TTWO",
+    "TXN",
+    "TXT",
+    "U",
+    "UAL",
+    "UBER",
+    "UDR",
+    "UL",
+    "ULTA",
+    "UNH",
+    "UNP",
+    "UPS",
+    "UPST",
+    "URI",
+    "USB",
+    "V",
+    "VALE",
+    "VICI",
+    "VLO",
+    "VMC",
+    "VRTX",
+    "VTR",
+    "VZ",
+    "WBD",
+    "WDAY",
+    "WDC",
+    "WEC",
+    "WELL",
+    "WFC",
+    "WM",
+    "WMB",
+    "WMT",
+    "WSM",
+    "WY",
+    "WYNN",
+    "XEL",
+    "XOM",
+    "XPEV",
+    "XYL",
+    "YUM",
+    "ZBH",
+    "ZION",
+    "ZS",
+    "ZTS"
+  ],
+  "excluded_evaluation_tickers": [
+    "AAPL",
+    "AMZN",
+    "CVNA",
+    "ENPH",
+    "IONQ",
+    "MSFT",
+    "NVDA",
+    "PLUG",
+    "RKLB",
+    "SMCI"
+  ],
+  "failures": [],
+  "series_info": [
+    {
+      "ticker": "ABBV",
+      "train_rows": 2998,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ABNB",
+      "train_rows": 998,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ABT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ACHR",
+      "train_rows": 992,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ADBE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ADI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ADSK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AEP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AES",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AFRM",
+      "train_rows": 976,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AIG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AJG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AKAM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ALB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ALGN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ALL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMAT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMC",
+      "train_rows": 2755,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMCR",
+      "train_rows": 2967,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AME",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMGN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AMT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AON",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "APA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "APD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "APH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "APP",
+      "train_rows": 913,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ARE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ASML",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ASTS",
+      "train_rows": 1277,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AVGO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AVY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AWK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AXP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AZN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "AZO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BABA",
+      "train_rows": 2566,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BAC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BALL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BBY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BHP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BIDU",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BIIB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BKNG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BKR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BLK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BMY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "BSX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "C",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CAG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CAH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CARR",
+      "train_rows": 1183,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CAT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CCI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CCL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CDNS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CELH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CF",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CFG",
+      "train_rows": 2563,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CHD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CHKP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CHRD",
+      "train_rows": 3638,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CHTR",
+      "train_rows": 3751,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CHWY",
+      "train_rows": 1375,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CLF",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CLX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CMCSA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CME",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CMG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CMI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CMS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CNP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COF",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COIN",
+      "train_rows": 914,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "COST",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CRM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CRWD",
+      "train_rows": 1377,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CSCO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CSX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CVS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "CVX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "D",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DAL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DASH",
+      "train_rows": 999,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DDOG",
+      "train_rows": 1308,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DECK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DELL",
+      "train_rows": 2085,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DEO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DHI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DHR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DIS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DKNG",
+      "train_rows": 1347,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DLR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DOW",
+      "train_rows": 1435,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DRI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DTE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DUK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DVN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "DXCM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EBAY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ECL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ED",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ELV",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EMN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EMR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EOG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EQIX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EQT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ES",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ESS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ETN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ETR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ETSY",
+      "train_rows": 2423,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EVRG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EXC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EXPE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "EXR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "F",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FANG",
+      "train_rows": 3051,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FAST",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FCX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FDX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FITB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FMC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FOX",
+      "train_rows": 1440,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FOXA",
+      "train_rows": 1441,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "FTNT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GEN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GILD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GIS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GM",
+      "train_rows": 3530,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GME",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GOOG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GSK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "GWW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HAL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HBAN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HCA",
+      "train_rows": 3454,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HIMS",
+      "train_rows": 1312,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HLT",
+      "train_rows": 2759,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HMC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HON",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HOOD",
+      "train_rows": 840,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HPE",
+      "train_rows": 2294,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HPQ",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HST",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HSY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HUBS",
+      "train_rows": 2552,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "HUM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IBM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ICE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IDXX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IFF",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "INTC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "INTU",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "INVH",
+      "train_rows": 1970,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IQV",
+      "train_rows": 2910,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IR",
+      "train_rows": 1900,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "IRM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ISRG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ITW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JCI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JD",
+      "train_rows": 2649,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JNJ",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JOBY",
+      "train_rows": 1020,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "JPM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KEY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KHC",
+      "train_rows": 2368,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KLAC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KMB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KMI",
+      "train_rows": 3472,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "KR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LCID",
+      "train_rows": 1056,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LEN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LI",
+      "train_rows": 1091,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LIN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LLY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LMT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LNT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LOW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LRCX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LULU",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LUV",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LVS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "LYV",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MAA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MAR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MARA",
+      "train_rows": 3132,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MCD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MCHP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MCK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MCO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MDLZ",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MDT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MET",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "META",
+      "train_rows": 3153,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MGM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MLM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MMM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MNST",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MOS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MPC",
+      "train_rows": 3380,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MRK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MRVL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MSTR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MTB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "MU",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NCLH",
+      "train_rows": 2986,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NEE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NEM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NET",
+      "train_rows": 1312,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NIO",
+      "train_rows": 1564,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NKE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NOC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NOW",
+      "train_rows": 3124,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NSC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NTAP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NTES",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NTRS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NUE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NVO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NVS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NWS",
+      "train_rows": 2882,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NWSA",
+      "train_rows": 2882,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "NXPI",
+      "train_rows": 3603,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "O",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OKE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OKLO",
+      "train_rows": 855,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OKTA",
+      "train_rows": 1924,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OMC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ON",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ORCL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ORLY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OTIS",
+      "train_rows": 1183,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "OXY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PANW",
+      "train_rows": 3110,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PARA",
+      "train_rows": 955,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PATH",
+      "train_rows": 909,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PCAR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PDD",
+      "train_rows": 1597,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PEG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PEP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PFE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PGR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PHM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PINS",
+      "train_rows": 1414,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PKG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PLD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PLTR",
+      "train_rows": 1048,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PNC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PPG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PPL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PRU",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PSA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PSX",
+      "train_rows": 3179,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PWR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "PYPL",
+      "train_rows": 2368,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "QCOM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RBLX",
+      "train_rows": 938,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RCL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "REGN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RELX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RF",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIOT",
+      "train_rows": 2182,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RIVN",
+      "train_rows": 767,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RMD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ROK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ROKU",
+      "train_rows": 1804,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ROST",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RSG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "RTX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SAP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SBAC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SBUX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SCHW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SHEL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SHOP",
+      "train_rows": 2399,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SHW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SLB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SNOW",
+      "train_rows": 1058,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SNPS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SOFI",
+      "train_rows": 983,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SONY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SOUN",
+      "train_rows": 651,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SPG",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SPGI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SPOT",
+      "train_rows": 1677,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SRE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "STLD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "STT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "STX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SWK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SYK",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "SYY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "T",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TEAM",
+      "train_rows": 2258,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TER",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TFC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TGT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TJX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TMO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TMUS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TPR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TRGP",
+      "train_rows": 3518,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TROW",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TRV",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TSN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TTD",
+      "train_rows": 2061,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TTWO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TXN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "TXT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "U",
+      "train_rows": 1056,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UAL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UBER",
+      "train_rows": 1399,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UDR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ULTA",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UNH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UNP",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UPS",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "UPST",
+      "train_rows": 994,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "URI",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "USB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "V",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VALE",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VICI",
+      "train_rows": 1739,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VLO",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VMC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VRTX",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VTR",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "VZ",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WBD",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WDAY",
+      "train_rows": 3051,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WDC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WEC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WELL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WFC",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WMB",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WMT",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WSM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WY",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "WYNN",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "XEL",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "XOM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "XPEV",
+      "train_rows": 1071,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "XYL",
+      "train_rows": 3303,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "YUM",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ZBH",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ZION",
+      "train_rows": 3752,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ZS",
+      "train_rows": 1688,
+      "validation_rows": 764
+    },
+    {
+      "ticker": "ZTS",
+      "train_rows": 2977,
+      "validation_rows": 764
+    }
+  ]
+}

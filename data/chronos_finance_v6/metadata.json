@@ -1,0 +1,3184 @@
+{
+  "version": "V6",
+  "start_date": "2010-01-01",
+  "end_date": "2026-01-01",
+  "context_length": 512,
+  "prediction_length": 20,
+  "validation_days": 252,
+  "minimum_required_rows": 784,
+  "target": "daily_log_return",
+  "past_only_covariates": [
+    "SPY_RET",
+    "QQQ_RET",
+    "VIX_RET",
+    "US5Y_CHG",
+    "US10Y_CHG",
+    "ABS_RETURN",
+    "REALIZED_VOL_20",
+    "VOLUME_Z"
+  ],
+  "held_out_stocks": [
+    "AAPL",
+    "AMZN",
+    "CVNA",
+    "ENPH",
+    "IONQ",
+    "MSFT",
+    "NVDA",
+    "PLUG",
+    "RKLB",
+    "SMCI"
+  ],
+  "candidate_equities": 395,
+  "usable_equities": 385,
+  "sector_coverage": {
+    "technology": 60,
+    "financials": 39,
+    "healthcare": 35,
+    "consumer_discretionary": 38,
+    "consumer_staples": 21,
+    "industrials": 40,
+    "energy": 20,
+    "materials": 26,
+    "utilities": 23,
+    "real_estate": 21,
+    "communication": 14,
+    "international_adr": 25,
+    "higher_beta_growth": 24
+  },
+  "series": [
+    {
+      "ticker": "ABBV",
+      "total_rows": 3250,
+      "train_rows": 2998,
+      "validation_rows": 764,
+      "first_date": "2013-01-31",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ABNB",
+      "total_rows": 1250,
+      "train_rows": 998,
+      "validation_rows": 764,
+      "first_date": "2021-01-11",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ABT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ACHR",
+      "total_rows": 1244,
+      "train_rows": 992,
+      "validation_rows": 764,
+      "first_date": "2021-01-20",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ADBE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ADI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ADSK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AEP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AES",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AFRM",
+      "total_rows": 1228,
+      "train_rows": 976,
+      "validation_rows": 764,
+      "first_date": "2021-02-11",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AIG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AJG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AKAM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ALB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ALGN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ALL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMAT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMC",
+      "total_rows": 3007,
+      "train_rows": 2755,
+      "validation_rows": 764,
+      "first_date": "2014-01-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMCR",
+      "total_rows": 3219,
+      "train_rows": 2967,
+      "validation_rows": 764,
+      "first_date": "2012-06-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AME",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMGN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AMT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AON",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "APA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "APD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "APH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "APP",
+      "total_rows": 1165,
+      "train_rows": 913,
+      "validation_rows": 764,
+      "first_date": "2021-05-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ARE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ASML",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ASTS",
+      "total_rows": 1529,
+      "train_rows": 1277,
+      "validation_rows": 764,
+      "first_date": "2019-12-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AVGO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AVY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AWK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AXP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AZN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "AZO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BABA",
+      "total_rows": 2818,
+      "train_rows": 2566,
+      "validation_rows": 764,
+      "first_date": "2014-10-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BAC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BALL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BBY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BHP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BIDU",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BIIB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BKNG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BKR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BLK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BMY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "BSX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "C",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CAG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CAH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CARR",
+      "total_rows": 1435,
+      "train_rows": 1183,
+      "validation_rows": 764,
+      "first_date": "2020-04-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CAT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CCI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CCL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CDNS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CELH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CF",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CFG",
+      "total_rows": 2815,
+      "train_rows": 2563,
+      "validation_rows": 764,
+      "first_date": "2014-10-22",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CHD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CHKP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CHRD",
+      "total_rows": 3890,
+      "train_rows": 3638,
+      "validation_rows": 764,
+      "first_date": "2010-07-16",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CHTR",
+      "total_rows": 4003,
+      "train_rows": 3751,
+      "validation_rows": 764,
+      "first_date": "2010-02-03",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CHWY",
+      "total_rows": 1627,
+      "train_rows": 1375,
+      "validation_rows": 764,
+      "first_date": "2019-07-15",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CLF",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CLX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CMCSA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CME",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CMG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CMI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CMS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CNP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "COF",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "COIN",
+      "total_rows": 1166,
+      "train_rows": 914,
+      "validation_rows": 764,
+      "first_date": "2021-05-12",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "COP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "COR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "COST",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CRM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CRWD",
+      "total_rows": 1629,
+      "train_rows": 1377,
+      "validation_rows": 764,
+      "first_date": "2019-07-11",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CSCO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CSX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CVS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "CVX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "D",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DAL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DASH",
+      "total_rows": 1251,
+      "train_rows": 999,
+      "validation_rows": 764,
+      "first_date": "2021-01-08",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DDOG",
+      "total_rows": 1560,
+      "train_rows": 1308,
+      "validation_rows": 764,
+      "first_date": "2019-10-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DECK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DELL",
+      "total_rows": 2337,
+      "train_rows": 2085,
+      "validation_rows": 764,
+      "first_date": "2016-09-15",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DEO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DHI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DHR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DIS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DKNG",
+      "total_rows": 1599,
+      "train_rows": 1347,
+      "validation_rows": 764,
+      "first_date": "2019-08-22",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DLR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DOW",
+      "total_rows": 1687,
+      "train_rows": 1435,
+      "validation_rows": 764,
+      "first_date": "2019-04-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DRI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DTE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DUK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DVN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "DXCM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EBAY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ECL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ED",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ELV",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EMN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EMR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EOG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EQIX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EQT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ES",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ESS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ETN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ETR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ETSY",
+      "total_rows": 2675,
+      "train_rows": 2423,
+      "validation_rows": 764,
+      "first_date": "2015-05-14",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EVRG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EXC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EXPE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "EXR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "F",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FANG",
+      "total_rows": 3303,
+      "train_rows": 3051,
+      "validation_rows": 764,
+      "first_date": "2012-11-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FAST",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FCX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FDX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FITB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FMC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FOX",
+      "total_rows": 1692,
+      "train_rows": 1440,
+      "validation_rows": 764,
+      "first_date": "2019-04-10",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FOXA",
+      "total_rows": 1693,
+      "train_rows": 1441,
+      "validation_rows": 764,
+      "first_date": "2019-04-09",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "FTNT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GEN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GILD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GIS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GM",
+      "total_rows": 3782,
+      "train_rows": 3530,
+      "validation_rows": 764,
+      "first_date": "2010-12-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GME",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GOOG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GSK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "GWW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HAL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HBAN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HCA",
+      "total_rows": 3706,
+      "train_rows": 3454,
+      "validation_rows": 764,
+      "first_date": "2011-04-07",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HIMS",
+      "total_rows": 1564,
+      "train_rows": 1312,
+      "validation_rows": 764,
+      "first_date": "2019-10-11",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HLT",
+      "total_rows": 3011,
+      "train_rows": 2759,
+      "validation_rows": 764,
+      "first_date": "2014-01-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HMC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HON",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HOOD",
+      "total_rows": 1092,
+      "train_rows": 840,
+      "validation_rows": 764,
+      "first_date": "2021-08-26",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HPE",
+      "total_rows": 2546,
+      "train_rows": 2294,
+      "validation_rows": 764,
+      "first_date": "2015-11-16",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HPQ",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HST",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HSY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HUBS",
+      "total_rows": 2804,
+      "train_rows": 2552,
+      "validation_rows": 764,
+      "first_date": "2014-11-06",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "HUM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IBM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ICE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IDXX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IFF",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "INTC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "INTU",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "INVH",
+      "total_rows": 2222,
+      "train_rows": 1970,
+      "validation_rows": 764,
+      "first_date": "2017-03-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IQV",
+      "total_rows": 3162,
+      "train_rows": 2910,
+      "validation_rows": 764,
+      "first_date": "2013-06-07",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IR",
+      "total_rows": 2152,
+      "train_rows": 1900,
+      "validation_rows": 764,
+      "first_date": "2017-06-12",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "IRM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ISRG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ITW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "JCI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "JD",
+      "total_rows": 2901,
+      "train_rows": 2649,
+      "validation_rows": 764,
+      "first_date": "2014-06-20",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "JNJ",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "JOBY",
+      "total_rows": 1272,
+      "train_rows": 1020,
+      "validation_rows": 764,
+      "first_date": "2020-12-08",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "JPM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KEY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KHC",
+      "total_rows": 2620,
+      "train_rows": 2368,
+      "validation_rows": 764,
+      "first_date": "2015-08-03",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KLAC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KMB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KMI",
+      "total_rows": 3724,
+      "train_rows": 3472,
+      "validation_rows": 764,
+      "first_date": "2011-03-14",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "KR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LCID",
+      "total_rows": 1308,
+      "train_rows": 1056,
+      "validation_rows": 764,
+      "first_date": "2020-10-16",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LEN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LI",
+      "total_rows": 1343,
+      "train_rows": 1091,
+      "validation_rows": 764,
+      "first_date": "2020-08-27",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LIN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LLY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LMT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LNT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LOW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LRCX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LULU",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LUV",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LVS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "LYV",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MAA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MAR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MARA",
+      "total_rows": 3384,
+      "train_rows": 3132,
+      "validation_rows": 764,
+      "first_date": "2012-06-04",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MCD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MCHP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MCK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MCO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MDLZ",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MDT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MET",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "META",
+      "total_rows": 3405,
+      "train_rows": 3153,
+      "validation_rows": 764,
+      "first_date": "2012-06-18",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MGM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MLM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MMM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MNST",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MOS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MPC",
+      "total_rows": 3632,
+      "train_rows": 3380,
+      "validation_rows": 764,
+      "first_date": "2011-07-25",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MRK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MRVL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MSTR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MTB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "MU",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NCLH",
+      "total_rows": 3238,
+      "train_rows": 2986,
+      "validation_rows": 764,
+      "first_date": "2013-02-19",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NEE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NEM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NET",
+      "total_rows": 1564,
+      "train_rows": 1312,
+      "validation_rows": 764,
+      "first_date": "2019-10-11",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NIO",
+      "total_rows": 1816,
+      "train_rows": 1564,
+      "validation_rows": 764,
+      "first_date": "2018-10-10",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NKE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NOC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NOW",
+      "total_rows": 3376,
+      "train_rows": 3124,
+      "validation_rows": 764,
+      "first_date": "2012-07-30",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NSC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NTAP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NTES",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NTRS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NUE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NVO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NVS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NWS",
+      "total_rows": 3134,
+      "train_rows": 2882,
+      "validation_rows": 764,
+      "first_date": "2013-07-18",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NWSA",
+      "total_rows": 3134,
+      "train_rows": 2882,
+      "validation_rows": 764,
+      "first_date": "2013-07-18",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "NXPI",
+      "total_rows": 3855,
+      "train_rows": 3603,
+      "validation_rows": 764,
+      "first_date": "2010-09-03",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "O",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OKE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OKLO",
+      "total_rows": 1107,
+      "train_rows": 855,
+      "validation_rows": 764,
+      "first_date": "2021-08-05",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OKTA",
+      "total_rows": 2176,
+      "train_rows": 1924,
+      "validation_rows": 764,
+      "first_date": "2017-05-08",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OMC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ON",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ORCL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ORLY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OTIS",
+      "total_rows": 1435,
+      "train_rows": 1183,
+      "validation_rows": 764,
+      "first_date": "2020-04-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "OXY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PANW",
+      "total_rows": 3362,
+      "train_rows": 3110,
+      "validation_rows": 764,
+      "first_date": "2012-08-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PARA",
+      "total_rows": 1207,
+      "train_rows": 955,
+      "validation_rows": 764,
+      "first_date": "2021-03-15",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PATH",
+      "total_rows": 1161,
+      "train_rows": 909,
+      "validation_rows": 764,
+      "first_date": "2021-05-19",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PCAR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PDD",
+      "total_rows": 1849,
+      "train_rows": 1597,
+      "validation_rows": 764,
+      "first_date": "2018-08-23",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PEG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PEP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PFE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PGR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PHM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PINS",
+      "total_rows": 1666,
+      "train_rows": 1414,
+      "validation_rows": 764,
+      "first_date": "2019-05-17",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PKG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PLD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PLTR",
+      "total_rows": 1300,
+      "train_rows": 1048,
+      "validation_rows": 764,
+      "first_date": "2020-10-28",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PNC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PPG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PPL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PRU",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PSA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PSX",
+      "total_rows": 3431,
+      "train_rows": 3179,
+      "validation_rows": 764,
+      "first_date": "2012-05-10",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PWR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "PYPL",
+      "total_rows": 2620,
+      "train_rows": 2368,
+      "validation_rows": 764,
+      "first_date": "2015-08-03",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "QCOM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RBLX",
+      "total_rows": 1190,
+      "train_rows": 938,
+      "validation_rows": 764,
+      "first_date": "2021-04-08",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RCL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "REGN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RELX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RF",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RIO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RIOT",
+      "total_rows": 2434,
+      "train_rows": 2182,
+      "validation_rows": 764,
+      "first_date": "2016-04-28",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RIVN",
+      "total_rows": 1019,
+      "train_rows": 767,
+      "validation_rows": 764,
+      "first_date": "2021-12-09",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RMD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ROK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ROKU",
+      "total_rows": 2056,
+      "train_rows": 1804,
+      "validation_rows": 764,
+      "first_date": "2017-10-26",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ROST",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RSG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "RTX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SAP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SBAC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SBUX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SCHW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SHEL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SHOP",
+      "total_rows": 2651,
+      "train_rows": 2399,
+      "validation_rows": 764,
+      "first_date": "2015-06-18",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SHW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SLB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SNOW",
+      "total_rows": 1310,
+      "train_rows": 1058,
+      "validation_rows": 764,
+      "first_date": "2020-10-14",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SNPS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SOFI",
+      "total_rows": 1235,
+      "train_rows": 983,
+      "validation_rows": 764,
+      "first_date": "2021-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SONY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SOUN",
+      "total_rows": 903,
+      "train_rows": 651,
+      "validation_rows": 764,
+      "first_date": "2022-05-26",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SPG",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SPGI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SPOT",
+      "total_rows": 1929,
+      "train_rows": 1677,
+      "validation_rows": 764,
+      "first_date": "2018-05-01",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SRE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "STLD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "STT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "STX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SWK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SYK",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "SYY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "T",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TEAM",
+      "total_rows": 2510,
+      "train_rows": 2258,
+      "validation_rows": 764,
+      "first_date": "2016-01-08",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TER",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TFC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TGT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TJX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TMO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TMUS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TPR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TRGP",
+      "total_rows": 3770,
+      "train_rows": 3518,
+      "validation_rows": 764,
+      "first_date": "2011-01-05",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TROW",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TRV",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TSN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TTD",
+      "total_rows": 2313,
+      "train_rows": 2061,
+      "validation_rows": 764,
+      "first_date": "2016-10-19",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TTWO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TXN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "TXT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "U",
+      "total_rows": 1308,
+      "train_rows": 1056,
+      "validation_rows": 764,
+      "first_date": "2020-10-16",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UAL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UBER",
+      "total_rows": 1651,
+      "train_rows": 1399,
+      "validation_rows": 764,
+      "first_date": "2019-06-10",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UDR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ULTA",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UNH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UNP",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UPS",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "UPST",
+      "total_rows": 1246,
+      "train_rows": 994,
+      "validation_rows": 764,
+      "first_date": "2021-01-15",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "URI",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "USB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "V",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VALE",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VICI",
+      "total_rows": 1991,
+      "train_rows": 1739,
+      "validation_rows": 764,
+      "first_date": "2018-01-31",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VLO",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VMC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VRTX",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VTR",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "VZ",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WBD",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WDAY",
+      "total_rows": 3303,
+      "train_rows": 3051,
+      "validation_rows": 764,
+      "first_date": "2012-11-13",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WDC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WEC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WELL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WFC",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WMB",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WMT",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WSM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WY",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "WYNN",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "XEL",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "XOM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "XPEV",
+      "total_rows": 1323,
+      "train_rows": 1071,
+      "validation_rows": 764,
+      "first_date": "2020-09-25",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "XYL",
+      "total_rows": 3555,
+      "train_rows": 3303,
+      "validation_rows": 764,
+      "first_date": "2011-11-10",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "YUM",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ZBH",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ZION",
+      "total_rows": 4004,
+      "train_rows": 3752,
+      "validation_rows": 764,
+      "first_date": "2010-02-02",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ZS",
+      "total_rows": 1940,
+      "train_rows": 1688,
+      "validation_rows": 764,
+      "first_date": "2018-04-16",
+      "last_date": "2025-12-31"
+    },
+    {
+      "ticker": "ZTS",
+      "total_rows": 3229,
+      "train_rows": 2977,
+      "validation_rows": 764,
+      "first_date": "2013-03-04",
+      "last_date": "2025-12-31"
+    }
+  ],
+  "insufficient_history": [
+    {
+      "ticker": "ARM",
+      "usable_rows": 557,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "AVB",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "CTRA",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "EA",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "EQR",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "K",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "MMC",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "MRO",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "SQ",
+      "usable_rows": 0,
+      "reason": "insufficient history (need 784)"
+    },
+    {
+      "ticker": "TEM",
+      "usable_rows": 368,
+      "reason": "insufficient history (need 784)"
+    }
+  ],
+  "failures": []
+}

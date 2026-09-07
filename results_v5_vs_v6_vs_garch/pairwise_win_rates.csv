@@ -1,0 +1,13 @@
+model_a,model_b,horizon,comparisons,model_a_wins,model_b_wins,ties,win_rate_excluding_ties
+Chronos-LoRA-V5,GARCH,1,500,250,250,0,0.5
+Chronos-LoRA-V5,GARCH,5,500,247,253,0,0.494
+Chronos-LoRA-V5,GARCH,10,500,262,238,0,0.524
+Chronos-LoRA-V5,GARCH,20,500,254,246,0,0.508
+Chronos-LoRA-V6,GARCH,1,500,245,255,0,0.49
+Chronos-LoRA-V6,GARCH,5,500,241,259,0,0.482
+Chronos-LoRA-V6,GARCH,10,500,262,238,0,0.524
+Chronos-LoRA-V6,GARCH,20,500,251,249,0,0.502
+Chronos-LoRA-V6,Chronos-LoRA-V5,1,500,223,277,0,0.446
+Chronos-LoRA-V6,Chronos-LoRA-V5,5,500,250,250,0,0.5
+Chronos-LoRA-V6,Chronos-LoRA-V5,10,500,226,274,0,0.452
+Chronos-LoRA-V6,Chronos-LoRA-V5,20,500,247,253,0,0.494
